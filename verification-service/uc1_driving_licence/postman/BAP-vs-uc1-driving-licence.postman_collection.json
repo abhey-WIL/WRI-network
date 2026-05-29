@@ -1,0 +1,220 @@
+{
+  "info": {
+    "_postman_id": "3fa0e1a4-5d02-46bf-92b9-8ca8decba6b8",
+    "name": "BAP:vs-uc1-driving-licence:VS UC1 — Driving Licence Verification",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "discover",
+      "item": [
+        {
+          "name": "discover",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"context\": {\n    \"networkId\": \"verification-service\",\n    \"action\": \"discover\",\n    \"version\": \"2.0.0\",\n    \"bapId\": \"bap.example.com\",\n    \"bapUri\": \"http://onix-bap:8081/bap/receiver\",\n    \"transactionId\": \"10dce2d5-4100-420c-9154-2ca7ec83c3d6\",\n    \"messageId\": \"c3d4e5f6-a7b8-4012-8d34-ef5678901abc\",\n    \"timestamp\": \"2026-05-12T10:15:00+05:30\",\n    \"schemaContext\": [\n      \"https://schema.beckn.io/verification-service/VerificationResource/v2.1/context.jsonld\",\n      \"https://schema.beckn.io/verification-service/VerificationOffer/v2.1/context.jsonld\"\n    ]\n  },\n  \"message\": {\n    \"intent\": {\n      \"filters\": {\n        \"type\": \"jsonpath\",\n        \"expression\": \"$.catalogs[*].resources[*] ? (@.resourceAttributes.verificationType.code == \\\"DRIVING_LICENCE\\\")\"\n      }\n    }\n  }\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{bap_adapter_url}}/discover",
+              "host": [
+                "{{bap_adapter_url}}"
+              ],
+              "path": [
+                "discover"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "item": [
+        {
+          "name": "select",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"context\": {\n    \"networkId\": \"verification-service\",\n    \"action\": \"select\",\n    \"version\": \"2.0.0\",\n    \"bapId\": \"bap.example.com\",\n    \"bapUri\": \"http://onix-bap:8081/bap/receiver\",\n    \"transactionId\": \"10dce2d5-4100-420c-9154-2ca7ec83c3d6\",\n    \"messageId\": \"e5f6a7b8-c9d0-4234-8f56-ab7890123cde\",\n    \"timestamp\": \"2026-05-12T10:28:00+05:30\",\n    \"bppId\": \"bpp.example.com\",\n    \"bppUri\": \"http://onix-bpp:8082/bpp/receiver\"\n  },\n  \"message\": {\n    \"contract\": {\n      \"status\": {\n        \"code\": \"DRAFT\"\n      },\n      \"commitments\": [\n        {\n          \"id\": \"commitment-uc1-dl-001\",\n          \"status\": {\n            \"descriptor\": {\n              \"code\": \"DRAFT\"\n            }\n          },\n          \"resources\": [\n            {\n              \"id\": \"res-vs-dl-001\",\n              \"quantity\": {\n                \"count\": 1\n              }\n            }\n          ],\n          \"offer\": {\n            \"id\": \"offer-vs-dl-std-001\",\n            \"resourceIds\": [\n              \"res-vs-dl-001\"\n            ]\n          }\n        }\n      ],\n      \"participants\": [\n        {\n          \"id\": \"part-uc1-cityexpress-001\"\n        }\n      ]\n    }\n  }\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{bap_adapter_url}}/select",
+              "host": [
+                "{{bap_adapter_url}}"
+              ],
+              "path": [
+                "select"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "init",
+      "item": [
+        {
+          "name": "init",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"context\": {\n    \"networkId\": \"verification-service\",\n    \"action\": \"init\",\n    \"version\": \"2.0.0\",\n    \"bapId\": \"bap.example.com\",\n    \"bapUri\": \"http://onix-bap:8081/bap/receiver\",\n    \"transactionId\": \"10dce2d5-4100-420c-9154-2ca7ec83c3d6\",\n    \"messageId\": \"a7b8c9d0-e1f2-4456-8b78-cd9012345ef0\",\n    \"timestamp\": \"2026-05-12T10:29:00+05:30\",\n    \"bppId\": \"bpp.example.com\",\n    \"bppUri\": \"http://onix-bpp:8082/bpp/receiver\"\n  },\n  \"message\": {\n    \"contract\": {\n      \"id\": \"contract-vs-10dce2d5\",\n      \"status\": {\n        \"code\": \"DRAFT\"\n      },\n      \"commitments\": [\n        {\n          \"id\": \"commitment-uc1-dl-001\",\n          \"status\": {\n            \"descriptor\": {\n              \"code\": \"DRAFT\"\n            }\n          },\n          \"resources\": [\n            {\n              \"id\": \"res-vs-dl-001\",\n              \"quantity\": {\n                \"count\": 1\n              }\n            }\n          ],\n          \"offer\": {\n            \"id\": \"offer-vs-dl-std-001\",\n            \"resourceIds\": [\n              \"res-vs-dl-001\"\n            ]\n          }\n        }\n      ],\n      \"consideration\": [\n        {\n          \"id\": \"cons-vs-dl-cat-001\",\n          \"status\": {\n            \"code\": \"PENDING\"\n          },\n          \"considerationAttributes\": {\n            \"@context\": \"https://schema.beckn.io/PriceSpecification/v2.1/context.jsonld\",\n            \"@type\": \"PriceSpecification\",\n            \"price\": 250,\n            \"priceCurrency\": \"INR\",\n            \"valueAddedTaxIncluded\": false,\n            \"description\": \"Per-request DL verification fee, excluding GST\"\n          }\n        }\n      ],\n      \"participants\": [\n        {\n          \"id\": \"part-uc1-cityexpress-001\",\n          \"role\": \"REQUESTER\",\n          \"descriptor\": {\n            \"name\": \"CityExpress Bus Services Pvt. Ltd.\",\n            \"shortDesc\": \"Requesting NP — intercity bus operator, Karnataka\"\n          }\n        },\n        {\n          \"id\": \"part-uc1-trustverify-001\",\n          \"role\": \"VERIFIER\",\n          \"descriptor\": {\n            \"name\": \"TrustVerify India Pvt. Ltd.\",\n            \"shortDesc\": \"Verification service provider — CERT-In empanelled, authorised UIDAI AUA\"\n          }\n        },\n        {\n          \"id\": \"part-uc1-ravi-kumar-001\",\n          \"role\": \"SUBJECT\",\n          \"descriptor\": {\n            \"name\": \"Ravi Kumar\",\n            \"shortDesc\": \"Driver subject — DL verification requested by CityExpress Bus Services\"\n          }\n        }\n      ],\n      \"contractAttributes\": {\n        \"@context\": \"https://raw.githubusercontent.com/abhimail/beckn-schemas/refs/heads/main/verification-service/VerificationContract/v2.1/context.jsonld\",\n        \"@type\": \"vc:VerificationContract\",\n        \"subject\": {\n          \"name\": \"Ravi Kumar\",\n          \"dateOfBirth\": \"1992-03-15\",\n          \"identifiers\": [\n            {\n              \"type\": \"LICENCE_NUMBER\",\n              \"value\": \"KA0120190123456\",\n              \"maskedValue\": \"KA01XXXX123456\"\n            },\n            {\n              \"type\": \"MOBILE\",\n              \"value\": \"XXXXXXX4521\",\n              \"maskedValue\": \"XXXXXXX4521\"\n            }\n          ]\n        },\n        \"purpose\": {\n          \"code\": \"EMPLOYMENT_ONBOARDING\",\n          \"description\": \"Verification of driving licence for HMV driver employment onboarding\"\n        },\n        \"consentReference\": {\n          \"consentId\": \"consent-uc1-rk-001\",\n          \"mechanism\": \"OTP\",\n          \"grantedAt\": \"2026-05-12T10:28:00+05:30\",\n          \"expiresAt\": \"2026-05-12T11:28:00+05:30\",\n          \"scope\": [\n            \"DRIVING_LICENCE\"\n          ]\n        },\n        \"requestedBy\": {\n          \"organizationName\": \"CityExpress Bus Services Pvt. Ltd.\",\n          \"organizationType\": \"EMPLOYER\",\n          \"referenceId\": \"onboarding-case-ce-2026-0512-001\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{bap_adapter_url}}/init",
+              "host": [
+                "{{bap_adapter_url}}"
+              ],
+              "path": [
+                "init"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "confirm",
+      "item": [
+        {
+          "name": "confirm",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"context\": {\n    \"networkId\": \"verification-service\",\n    \"action\": \"confirm\",\n    \"version\": \"2.0.0\",\n    \"bapId\": \"bap.example.com\",\n    \"bapUri\": \"http://onix-bap:8081/bap/receiver\",\n    \"transactionId\": \"10dce2d5-4100-420c-9154-2ca7ec83c3d6\",\n    \"messageId\": \"c9d0e1f2-a3b4-4678-8d90-ef1234567ab2\",\n    \"timestamp\": \"2026-05-12T10:30:00+05:30\",\n    \"bppId\": \"bpp.example.com\",\n    \"bppUri\": \"http://onix-bpp:8082/bpp/receiver\"\n  },\n  \"message\": {\n    \"contract\": {\n      \"id\": \"contract-vs-10dce2d5\",\n      \"status\": {\n        \"code\": \"ACTIVE\"\n      },\n      \"commitments\": [\n        {\n          \"id\": \"commitment-uc1-dl-001\",\n          \"status\": {\n            \"descriptor\": {\n              \"code\": \"ACTIVE\"\n            }\n          },\n          \"resources\": [\n            {\n              \"id\": \"res-vs-dl-001\",\n              \"quantity\": {\n                \"count\": 1\n              }\n            }\n          ],\n          \"offer\": {\n            \"id\": \"offer-vs-dl-std-001\",\n            \"resourceIds\": [\n              \"res-vs-dl-001\"\n            ]\n          }\n        }\n      ],\n      \"consideration\": [\n        {\n          \"id\": \"cons-vs-dl-cat-001\",\n          \"status\": {\n            \"code\": \"ACTIVE\"\n          },\n          \"considerationAttributes\": {\n            \"@context\": \"https://schema.beckn.io/PriceSpecification/v2.1/context.jsonld\",\n            \"@type\": \"PriceSpecification\",\n            \"price\": 250,\n            \"priceCurrency\": \"INR\",\n            \"valueAddedTaxIncluded\": false,\n            \"description\": \"Per-request DL verification fee, excluding GST\",\n            \"selectedPaymentMethod\": \"UPI\",\n            \"transactionRef\": \"pay-ref-vs-10dce2d5\",\n            \"paymentAuthorisation\": {\n              \"authCode\": \"pay-ref-vs-10dce2d5\",\n              \"authProvider\": \"HDFC_UPI\",\n              \"authTimestamp\": \"2026-05-12T10:29:55+05:30\",\n              \"authAmount\": 250\n            }\n          }\n        }\n      ],\n      \"participants\": [\n        {\n          \"id\": \"part-uc1-cityexpress-001\",\n          \"role\": \"REQUESTER\",\n          \"descriptor\": {\n            \"name\": \"CityExpress Bus Services Pvt. Ltd.\",\n            \"shortDesc\": \"Requesting NP — intercity bus operator, Karnataka\"\n          }\n        },\n        {\n          \"id\": \"part-uc1-trustverify-001\",\n          \"role\": \"VERIFIER\",\n          \"descriptor\": {\n            \"name\": \"TrustVerify India Pvt. Ltd.\",\n            \"shortDesc\": \"Verification service provider — CERT-In empanelled, authorised UIDAI AUA\"\n          }\n        },\n        {\n          \"id\": \"part-uc1-ravi-kumar-001\",\n          \"role\": \"SUBJECT\",\n          \"descriptor\": {\n            \"name\": \"Ravi Kumar\",\n            \"shortDesc\": \"Driver subject — DL verification requested by CityExpress Bus Services\"\n          }\n        }\n      ],\n      \"contractAttributes\": {\n        \"@context\": \"https://raw.githubusercontent.com/abhimail/beckn-schemas/refs/heads/main/verification-service/VerificationContract/v2.1/context.jsonld\",\n        \"@type\": \"vc:VerificationContract\",\n        \"subject\": {\n          \"name\": \"Ravi Kumar\",\n          \"dateOfBirth\": \"1992-03-15\",\n          \"identifiers\": [\n            {\n              \"type\": \"LICENCE_NUMBER\",\n              \"value\": \"KA0120190123456\",\n              \"maskedValue\": \"KA01XXXX123456\"\n            },\n            {\n              \"type\": \"MOBILE\",\n              \"value\": \"XXXXXXX4521\",\n              \"maskedValue\": \"XXXXXXX4521\"\n            }\n          ]\n        },\n        \"purpose\": {\n          \"code\": \"EMPLOYMENT_ONBOARDING\",\n          \"description\": \"Verification of driving licence for HMV driver employment onboarding\"\n        },\n        \"consentReference\": {\n          \"consentId\": \"consent-uc1-rk-001\",\n          \"mechanism\": \"OTP\",\n          \"grantedAt\": \"2026-05-12T10:28:00+05:30\",\n          \"expiresAt\": \"2026-05-12T11:28:00+05:30\",\n          \"scope\": [\n            \"DRIVING_LICENCE\"\n          ]\n        },\n        \"requestedBy\": {\n          \"organizationName\": \"CityExpress Bus Services Pvt. Ltd.\",\n          \"organizationType\": \"EMPLOYER\",\n          \"referenceId\": \"onboarding-case-ce-2026-0512-001\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{bap_adapter_url}}/confirm",
+              "host": [
+                "{{bap_adapter_url}}"
+              ],
+              "path": [
+                "confirm"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "status",
+      "item": [
+        {
+          "name": "status",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"context\": {\n    \"networkId\": \"verification-service\",\n    \"action\": \"status\",\n    \"version\": \"2.0.0\",\n    \"bapId\": \"bap.example.com\",\n    \"bapUri\": \"http://onix-bap:8081/bap/receiver\",\n    \"transactionId\": \"10dce2d5-4100-420c-9154-2ca7ec83c3d6\",\n    \"messageId\": \"e1f2a3b4-c5d6-4890-8f12-ab3456789cd4\",\n    \"timestamp\": \"2026-05-12T11:00:00+05:30\",\n    \"bppId\": \"bpp.example.com\",\n    \"bppUri\": \"http://onix-bpp:8082/bpp/receiver\"\n  },\n  \"message\": {\n    \"contract\": {\n      \"id\": \"contract-vs-10dce2d5\",\n      \"commitments\": [\n        {\n          \"id\": \"commitment-uc1-dl-001\",\n          \"status\": {\n            \"descriptor\": {\n              \"code\": \"ACTIVE\"\n            }\n          },\n          \"resources\": [\n            {\n              \"id\": \"res-vs-dl-001\",\n              \"quantity\": {\n                \"count\": 1\n              }\n            }\n          ],\n          \"offer\": {\n            \"id\": \"offer-vs-dl-std-001\",\n            \"resourceIds\": [\n              \"res-vs-dl-001\"\n            ]\n          }\n        }\n      ]\n    }\n  }\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{bap_adapter_url}}/status",
+              "host": [
+                "{{bap_adapter_url}}"
+              ],
+              "path": [
+                "status"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "networkId",
+      "value": "verification-service"
+    },
+    {
+      "key": "version",
+      "value": "2.0.0"
+    },
+    {
+      "key": "bapId",
+      "value": "bap.example.com"
+    },
+    {
+      "key": "bapUri",
+      "value": "http://onix-bap:8081/bap/receiver"
+    },
+    {
+      "key": "bppId",
+      "value": "bpp.example.com"
+    },
+    {
+      "key": "bppUri",
+      "value": "http://onix-bpp:8082/bpp/receiver"
+    },
+    {
+      "key": "transactionId",
+      "value": "10dce2d5-4100-420c-9154-2ca7ec83c3d6"
+    },
+    {
+      "key": "bap_adapter_url",
+      "value": "http://localhost:8081/bap/caller"
+    }
+  ]
+}

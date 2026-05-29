@@ -1,0 +1,50 @@
+{
+  "context": {
+    "networkId": "verification-service",
+    "action": "select",
+    "version": "2.0.0",
+    "bapId": "bap.example.com",
+    "bapUri": "http://onix-bap:8081/bap/receiver",
+    "transactionId": "10dce2d5-4100-420c-9154-2ca7ec83c3d6",
+    "messageId": "e5f6a7b8-c9d0-4234-8f56-ab7890123cde",
+    "timestamp": "2026-05-12T10:28:00+05:30",
+    "bppId": "bpp.example.com",
+    "bppUri": "http://onix-bpp:8082/bpp/receiver"
+  },
+  "message": {
+    "contract": {
+      "status": {
+        "code": "DRAFT"
+      },
+      "commitments": [
+        {
+          "id": "commitment-uc1-dl-001",
+          "status": {
+            "descriptor": {
+              "code": "DRAFT"
+            }
+          },
+          "resources": [
+            {
+              "id": "res-vs-dl-001",
+              "quantity": {
+                "count": 1
+              }
+            }
+          ],
+          "offer": {
+            "id": "offer-vs-dl-std-001",
+            "resourceIds": [
+              "res-vs-dl-001"
+            ]
+          }
+        }
+      ],
+      "participants": [
+        {
+          "id": "part-uc1-cityexpress-001"
+        }
+      ]
+    }
+  }
+}

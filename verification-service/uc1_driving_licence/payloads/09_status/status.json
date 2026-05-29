@@ -1,0 +1,43 @@
+{
+  "context": {
+    "networkId": "verification-service",
+    "action": "status",
+    "version": "2.0.0",
+    "bapId": "bap.example.com",
+    "bapUri": "http://onix-bap:8081/bap/receiver",
+    "transactionId": "10dce2d5-4100-420c-9154-2ca7ec83c3d6",
+    "messageId": "e1f2a3b4-c5d6-4890-8f12-ab3456789cd4",
+    "timestamp": "2026-05-12T11:00:00+05:30",
+    "bppId": "bpp.example.com",
+    "bppUri": "http://onix-bpp:8082/bpp/receiver"
+  },
+  "message": {
+    "contract": {
+      "id": "contract-vs-10dce2d5",
+      "commitments": [
+        {
+          "id": "commitment-uc1-dl-001",
+          "status": {
+            "descriptor": {
+              "code": "ACTIVE"
+            }
+          },
+          "resources": [
+            {
+              "id": "res-vs-dl-001",
+              "quantity": {
+                "count": 1
+              }
+            }
+          ],
+          "offer": {
+            "id": "offer-vs-dl-std-001",
+            "resourceIds": [
+              "res-vs-dl-001"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,364 @@
+{
+  "context": {
+    "networkId": "verification-service",
+    "action": "on_status",
+    "version": "2.0.0",
+    "bapId": "bap.example.com",
+    "bapUri": "http://onix-bap:8081/bap/receiver",
+    "transactionId": "10dce2d5-4100-420c-9154-2ca7ec83c3d6",
+    "messageId": "b2c3d4e5-f6a7-4901-8c23-de4567890fa1",
+    "timestamp": "2026-05-21T10:00:03+05:30",
+    "bppId": "bpp.example.com",
+    "bppUri": "http://onix-bpp:8082/bpp/receiver"
+  },
+  "message": {
+    "contract": {
+      "id": "contract-vs-10dce2d5",
+      "status": {
+        "code": "ACTIVE"
+      },
+      "descriptor": {
+        "name": "Skill Certificate Verification — ZapCharge / Ankit Patel",
+        "shortDesc": "Verification complete — VERIFIED"
+      },
+      "commitments": [
+        {
+          "id": "commitment-uc4-skill-001",
+          "status": {
+            "descriptor": {
+              "code": "ACTIVE"
+            }
+          },
+          "resources": [
+            {
+              "id": "res-vs-skill-001",
+              "descriptor": {
+                "name": "Skill Certificate Verification",
+                "shortDesc": "Hybrid verification of NSDC and Sector Skill Council certificates"
+              },
+              "resourceAttributes": {
+                "@context": "https://schema.beckn.io/verification-service/VerificationResource/v2.1/context.jsonld",
+                "@type": "vr:VerificationResource",
+                "verificationType": {
+                  "code": "SKILL_CERTIFICATE",
+                  "name": "Skill Certificate Verification"
+                },
+                "supportedDocumentTypes": [
+                  {
+                    "code": "SKILL_CERT",
+                    "name": "NSDC / Sector Skill Council Certificate"
+                  },
+                  {
+                    "code": "DEGREE_CERT",
+                    "name": "Vocational Training Degree Certificate"
+                  }
+                ],
+                "supportedJurisdictions": [
+                  {
+                    "code": "IN",
+                    "name": "India"
+                  }
+                ],
+                "verificationMethod": "HYBRID",
+                "requiredInputFields": [
+                  {
+                    "fieldName": "certificateNumber",
+                    "displayName": "Certificate Number",
+                    "fieldType": "STRING",
+                    "isRequired": true
+                  },
+                  {
+                    "fieldName": "holderName",
+                    "displayName": "Certificate Holder Name",
+                    "fieldType": "STRING",
+                    "isRequired": true
+                  },
+                  {
+                    "fieldName": "issuingBody",
+                    "displayName": "Issuing Body / Sector Skill Council",
+                    "fieldType": "STRING",
+                    "isRequired": true
+                  },
+                  {
+                    "fieldName": "issueYear",
+                    "displayName": "Year of Issue",
+                    "fieldType": "NUMBER",
+                    "isRequired": false
+                  }
+                ],
+                "authoritativeSource": {
+                  "name": "Skill India Portal — National Skill Development Corporation",
+                  "url": "https://www.skillindia.gov.in",
+                  "type": "GOVERNMENT_DATABASE"
+                },
+                "outputFields": [
+                  {
+                    "fieldName": "holderName",
+                    "displayName": "Holder Name",
+                    "fieldType": "STRING"
+                  },
+                  {
+                    "fieldName": "certificateNumber",
+                    "displayName": "Certificate Number",
+                    "fieldType": "STRING"
+                  },
+                  {
+                    "fieldName": "skillName",
+                    "displayName": "Skill / Trade Name",
+                    "fieldType": "STRING"
+                  },
+                  {
+                    "fieldName": "qualificationPack",
+                    "displayName": "Qualification Pack ID",
+                    "fieldType": "STRING"
+                  },
+                  {
+                    "fieldName": "issuingBody",
+                    "displayName": "Issuing Body",
+                    "fieldType": "STRING"
+                  },
+                  {
+                    "fieldName": "issueDate",
+                    "displayName": "Issue Date",
+                    "fieldType": "DATE"
+                  },
+                  {
+                    "fieldName": "expiryDate",
+                    "displayName": "Expiry Date",
+                    "fieldType": "DATE"
+                  }
+                ],
+                "complianceStandards": [
+                  {
+                    "code": "NSQF",
+                    "name": "National Skills Qualifications Framework"
+                  },
+                  {
+                    "code": "DPDPA_2023",
+                    "name": "Digital Personal Data Protection Act, 2023"
+                  }
+                ]
+              },
+              "quantity": {
+                "count": 1
+              }
+            }
+          ],
+          "offer": {
+            "id": "offer-vs-skill-hybrid-001",
+            "resourceIds": [
+              "res-vs-skill-001"
+            ],
+            "descriptor": {
+              "name": "Skill Certificate Verification — Hybrid",
+              "shortDesc": "NSDC skill certificate verification, result within 1 business day"
+            },
+            "offerAttributes": {
+              "@context": "https://schema.beckn.io/verification-service/VerificationOffer/v2.1/context.jsonld",
+              "@type": "vo:VerificationOffer",
+              "turnaroundTime": "P1D",
+              "resultValidityPeriod": "P6M",
+              "pricingModel": "PER_REQUEST",
+              "serviceLevel": "STANDARD",
+              "dataRetentionPolicy": "P30D",
+              "supportedConsentMechanisms": [
+                "OTP",
+                "DIGITAL_SIGNATURE",
+                "OFFLINE_CONSENT"
+              ]
+            },
+            "considerations": [
+              {
+                "id": "cons-vs-skill-cat-001",
+                "considerationAttributes": {
+                  "@context": "https://schema.beckn.io/PriceSpecification/v2.1/context.jsonld",
+                  "@type": "PriceSpecification",
+                  "price": 350,
+                  "priceCurrency": "INR",
+                  "valueAddedTaxIncluded": false,
+                  "description": "Per-request skill certificate verification fee, excluding GST"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "consideration": [
+        {
+          "id": "cons-vs-skill-cat-001",
+          "status": {
+            "code": "ACTIVE"
+          },
+          "considerationAttributes": {
+            "@context": "https://schema.beckn.io/PriceSpecification/v2.1/context.jsonld",
+            "@type": "PriceSpecification",
+            "price": 350,
+            "priceCurrency": "INR",
+            "valueAddedTaxIncluded": false,
+            "description": "Per-request skill certificate verification fee, excluding GST",
+            "selectedPaymentMethod": "NEFT",
+            "transactionRef": "pay-ref-vs-10dce2d5"
+          }
+        }
+      ],
+      "participants": [
+        {
+          "id": "part-uc4-zapcharge-001",
+          "role": "REQUESTER",
+          "descriptor": {
+            "name": "ZapCharge Fleet Services Pvt. Ltd.",
+            "shortDesc": "Requesting NP — staffing and fleet operations platform, Ahmedabad"
+          }
+        },
+        {
+          "id": "part-uc4-certverify-001",
+          "role": "VERIFIER",
+          "descriptor": {
+            "name": "CertVerify India Pvt. Ltd.",
+            "shortDesc": "Verification service provider — NCVT-empanelled skill certificate verifier"
+          }
+        },
+        {
+          "id": "part-uc4-ankit-patel-001",
+          "role": "SUBJECT",
+          "descriptor": {
+            "name": "Ankit Patel",
+            "shortDesc": "Electrician subject — ITI certificate verification requested by ZapCharge for job listing"
+          }
+        }
+      ],
+      "performance": [
+        {
+          "id": "perf-uc4-skill-001",
+          "commitmentIds": [
+            "commitment-uc4-skill-001"
+          ],
+          "performanceAttributes": {
+            "@context": "https://raw.githubusercontent.com/abhimail/beckn-schemas/refs/heads/main/verification-service/VerificationPerformance/v2.1/context.jsonld",
+            "@type": "vp:VerificationPerformance",
+            "verificationResult": {
+              "status": "VERIFIED",
+              "matchScore": 0.97,
+              "remarks": "NCVT-ITI-2022-GJ-7891 found in NCVT MIS. Certificate holder 'ANKIT PATEL' matches. Trade: Electrician, Government ITI Ahmedabad."
+            },
+            "processingSteps": [
+              {
+                "stepName": "INPUT_VALIDATION",
+                "status": "COMPLETED",
+                "timestamp": "2026-05-20T09:32:10+05:30"
+              },
+              {
+                "stepName": "SOURCE_QUERY",
+                "status": "COMPLETED",
+                "timestamp": "2026-05-20T09:32:15+05:30",
+                "details": "Skill India portal returned certificate record"
+              },
+              {
+                "stepName": "DATA_EXTRACTION",
+                "status": "COMPLETED",
+                "timestamp": "2026-05-20T09:32:16+05:30"
+              },
+              {
+                "stepName": "MANUAL_REVIEW",
+                "status": "COMPLETED",
+                "timestamp": "2026-05-21T09:45:00+05:30",
+                "details": "Reviewer confirmed ASDC issuing body and QP code"
+              },
+              {
+                "stepName": "RESULT_COMPILATION",
+                "status": "COMPLETED",
+                "timestamp": "2026-05-21T09:50:00+05:30"
+              }
+            ],
+            "verifiedData": {
+              "holderName": "ANKIT PATEL",
+              "certificateNumber": "NCVT-ITI-2022-GJ-7891",
+              "skillName": "Electrician",
+              "qualificationPack": "NCVT-ITI-ELEC-2022",
+              "issuingBody": "NCVT / Government ITI, Ahmedabad",
+              "issueDate": "2022-07-15",
+              "expiryDate": "2027-07-14"
+            },
+            "evidence": [
+              {
+                "type": "NCVT_MIS_REFERENCE",
+                "value": "NCVT-MIS-REF-20260521-00034521",
+                "timestamp": "2026-05-21T11:42:10+05:30"
+              }
+            ],
+            "confidenceScore": 0.95,
+            "verifiedAt": "2026-05-21T09:50:00+05:30",
+            "validUntil": "2026-11-21T09:50:00+05:30"
+          }
+        }
+      ],
+      "contractAttributes": {
+        "@context": "https://raw.githubusercontent.com/abhimail/beckn-schemas/refs/heads/main/verification-service/VerificationContract/v2.1/context.jsonld",
+        "@type": "vc:VerificationContract",
+        "subject": {
+          "name": "Ankit Patel",
+          "dateOfBirth": "1999-04-20",
+          "identifiers": [
+            {
+              "type": "CERTIFICATE_NUMBER",
+              "value": "NCVT-ITI-2022-GJ-7891",
+              "maskedValue": "NCVT-ITI-2022-GJ-7891"
+            },
+            {
+              "type": "MOBILE",
+              "value": "XXXXXXX4521",
+              "maskedValue": "XXXXXXX6382"
+            }
+          ]
+        },
+        "purpose": {
+          "code": "PLATFORM_ONBOARDING",
+          "description": "ITI skill certificate verification for electrician job listing on staffing platform"
+        },
+        "consentReference": {
+          "consentId": "consent-uc4-ap-001",
+          "mechanism": "OTP",
+          "grantedAt": "2026-05-20T09:20:00+05:30",
+          "expiresAt": "2026-05-20T10:20:00+05:30",
+          "scope": [
+            "SKILL_CERTIFICATE"
+          ]
+        },
+        "requestedBy": {
+          "participantId": "part-uc4-zapcharge-001",
+          "role": "REQUESTER"
+        },
+        "certificateInput": {
+          "certificateNumber": "NSDC-EV-2024-78901",
+          "holderName": "Arjun Mehta",
+          "issuingBody": "ASDC — Automotive Skills Development Council",
+          "issueYear": 2024
+        },
+        "aggregateResult": {
+          "status": "VERIFIED",
+          "summary": "ITI Electrician certificate NCVT-ITI-2022-GJ-7891 verified against NCVT MIS. Certificate valid; holder name and trade confirmed.",
+          "completedAt": "2026-05-21T11:42:18+05:30"
+        },
+        "expiresAt": "2026-11-20T09:32:00+05:30",
+        "issuedCredentials": [
+          {
+            "credentialId": "cred-uc4-skill-001",
+            "credentialType": "PDF",
+            "format": "application/pdf",
+            "url": "https://certs.certverify.in/skill/cred-uc4-skill-001.pdf",
+            "issuedAt": "2026-05-21T09:55:00+05:30",
+            "credentialExpiresAt": "2026-11-21T09:55:00+05:30",
+            "issuerId": "bpp.example.com"
+          }
+        ]
+      },
+      "settlements": [
+        {
+          "id": "settlement-uc4-skill-001",
+          "considerationId": "cons-vs-skill-cat-001",
+          "status": "COMPLETE"
+        }
+      ]
+    }
+  }
+}

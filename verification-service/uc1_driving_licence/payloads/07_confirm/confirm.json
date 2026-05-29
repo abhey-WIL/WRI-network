@@ -1,0 +1,134 @@
+{
+  "context": {
+    "networkId": "verification-service",
+    "action": "confirm",
+    "version": "2.0.0",
+    "bapId": "bap.example.com",
+    "bapUri": "http://onix-bap:8081/bap/receiver",
+    "transactionId": "10dce2d5-4100-420c-9154-2ca7ec83c3d6",
+    "messageId": "c9d0e1f2-a3b4-4678-8d90-ef1234567ab2",
+    "timestamp": "2026-05-12T10:30:00+05:30",
+    "bppId": "bpp.example.com",
+    "bppUri": "http://onix-bpp:8082/bpp/receiver"
+  },
+  "message": {
+    "contract": {
+      "id": "contract-vs-10dce2d5",
+      "status": {
+        "code": "ACTIVE"
+      },
+      "commitments": [
+        {
+          "id": "commitment-uc1-dl-001",
+          "status": {
+            "descriptor": {
+              "code": "ACTIVE"
+            }
+          },
+          "resources": [
+            {
+              "id": "res-vs-dl-001",
+              "quantity": {
+                "count": 1
+              }
+            }
+          ],
+          "offer": {
+            "id": "offer-vs-dl-std-001",
+            "resourceIds": [
+              "res-vs-dl-001"
+            ]
+          }
+        }
+      ],
+      "consideration": [
+        {
+          "id": "cons-vs-dl-cat-001",
+          "status": {
+            "code": "ACTIVE"
+          },
+          "considerationAttributes": {
+            "@context": "https://schema.beckn.io/PriceSpecification/v2.1/context.jsonld",
+            "@type": "PriceSpecification",
+            "price": 250,
+            "priceCurrency": "INR",
+            "valueAddedTaxIncluded": false,
+            "description": "Per-request DL verification fee, excluding GST",
+            "selectedPaymentMethod": "UPI",
+            "transactionRef": "pay-ref-vs-10dce2d5",
+            "paymentAuthorisation": {
+              "authCode": "pay-ref-vs-10dce2d5",
+              "authProvider": "HDFC_UPI",
+              "authTimestamp": "2026-05-12T10:29:55+05:30",
+              "authAmount": 250
+            }
+          }
+        }
+      ],
+      "participants": [
+        {
+          "id": "part-uc1-cityexpress-001",
+          "role": "REQUESTER",
+          "descriptor": {
+            "name": "CityExpress Bus Services Pvt. Ltd.",
+            "shortDesc": "Requesting NP — intercity bus operator, Karnataka"
+          }
+        },
+        {
+          "id": "part-uc1-trustverify-001",
+          "role": "VERIFIER",
+          "descriptor": {
+            "name": "TrustVerify India Pvt. Ltd.",
+            "shortDesc": "Verification service provider — CERT-In empanelled, authorised UIDAI AUA"
+          }
+        },
+        {
+          "id": "part-uc1-ravi-kumar-001",
+          "role": "SUBJECT",
+          "descriptor": {
+            "name": "Ravi Kumar",
+            "shortDesc": "Driver subject — DL verification requested by CityExpress Bus Services"
+          }
+        }
+      ],
+      "contractAttributes": {
+        "@context": "https://raw.githubusercontent.com/abhimail/beckn-schemas/refs/heads/main/verification-service/VerificationContract/v2.1/context.jsonld",
+        "@type": "vc:VerificationContract",
+        "subject": {
+          "name": "Ravi Kumar",
+          "dateOfBirth": "1992-03-15",
+          "identifiers": [
+            {
+              "type": "LICENCE_NUMBER",
+              "value": "KA0120190123456",
+              "maskedValue": "KA01XXXX123456"
+            },
+            {
+              "type": "MOBILE",
+              "value": "XXXXXXX4521",
+              "maskedValue": "XXXXXXX4521"
+            }
+          ]
+        },
+        "purpose": {
+          "code": "EMPLOYMENT_ONBOARDING",
+          "description": "Verification of driving licence for HMV driver employment onboarding"
+        },
+        "consentReference": {
+          "consentId": "consent-uc1-rk-001",
+          "mechanism": "OTP",
+          "grantedAt": "2026-05-12T10:28:00+05:30",
+          "expiresAt": "2026-05-12T11:28:00+05:30",
+          "scope": [
+            "DRIVING_LICENCE"
+          ]
+        },
+        "requestedBy": {
+          "organizationName": "CityExpress Bus Services Pvt. Ltd.",
+          "organizationType": "EMPLOYER",
+          "referenceId": "onboarding-case-ce-2026-0512-001"
+        }
+      }
+    }
+  }
+}

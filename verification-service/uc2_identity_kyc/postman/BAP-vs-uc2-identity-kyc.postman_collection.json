@@ -1,0 +1,220 @@
+{
+  "info": {
+    "_postman_id": "242e4edb-2563-4f11-a884-cf25771bef2c",
+    "name": "BAP:vs-uc2-identity-kyc:VS UC2 — Identity KYC Verification",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "discover",
+      "item": [
+        {
+          "name": "discover",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"context\": {\n    \"networkId\": \"verification-service\",\n    \"action\": \"discover\",\n    \"version\": \"2.0.0\",\n    \"bapId\": \"bap.example.com\",\n    \"bapUri\": \"http://onix-bap:8081/bap/receiver\",\n    \"transactionId\": \"10dce2d5-4100-420c-9154-2ca7ec83c3d6\",\n    \"messageId\": \"a3b4c5d6-e7f8-4012-8b34-cd5678901ef2\",\n    \"timestamp\": \"2026-05-15T14:05:00+05:30\",\n    \"schemaContext\": [\n      \"https://schema.beckn.io/verification-service/VerificationResource/v2.1/context.jsonld\",\n      \"https://schema.beckn.io/verification-service/VerificationOffer/v2.1/context.jsonld\"\n    ]\n  },\n  \"message\": {\n    \"intent\": {\n      \"filters\": {\n        \"type\": \"jsonpath\",\n        \"expression\": \"$.catalogs[*].resources[*] ? (@.resourceAttributes.verificationType.code == \\\"IDENTITY\\\")\"\n      },\n      \"textSearch\": \"Aadhaar eKYC\"\n    }\n  }\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{bap_adapter_url}}/discover",
+              "host": [
+                "{{bap_adapter_url}}"
+              ],
+              "path": [
+                "discover"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "item": [
+        {
+          "name": "select",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"context\": {\n    \"networkId\": \"verification-service\",\n    \"action\": \"select\",\n    \"version\": \"2.0.0\",\n    \"bapId\": \"bap.example.com\",\n    \"bapUri\": \"http://onix-bap:8081/bap/receiver\",\n    \"transactionId\": \"10dce2d5-4100-420c-9154-2ca7ec83c3d6\",\n    \"messageId\": \"c5d6e7f8-a9b0-4234-8d56-ef7890123ab4\",\n    \"timestamp\": \"2026-05-15T14:10:00+05:30\",\n    \"bppId\": \"bpp.example.com\",\n    \"bppUri\": \"http://onix-bpp:8082/bpp/receiver\"\n  },\n  \"message\": {\n    \"contract\": {\n      \"status\": {\n        \"code\": \"DRAFT\"\n      },\n      \"commitments\": [\n        {\n          \"id\": \"commitment-uc2-identity-001\",\n          \"status\": {\n            \"descriptor\": {\n              \"code\": \"DRAFT\"\n            }\n          },\n          \"resources\": [\n            {\n              \"id\": \"res-vs-identity-001\",\n              \"quantity\": {\n                \"count\": 1\n              }\n            }\n          ],\n          \"offer\": {\n            \"id\": \"offer-vs-identity-instant-001\",\n            \"resourceIds\": [\n              \"res-vs-identity-001\"\n            ]\n          }\n        }\n      ],\n      \"participants\": [\n        {\n          \"id\": \"part-uc2-greenmove-001\"\n        }\n      ]\n    }\n  }\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{bap_adapter_url}}/select",
+              "host": [
+                "{{bap_adapter_url}}"
+              ],
+              "path": [
+                "select"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "init",
+      "item": [
+        {
+          "name": "init",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"context\": {\n    \"networkId\": \"verification-service\",\n    \"action\": \"init\",\n    \"version\": \"2.0.0\",\n    \"bapId\": \"bap.example.com\",\n    \"bapUri\": \"http://onix-bap:8081/bap/receiver\",\n    \"transactionId\": \"10dce2d5-4100-420c-9154-2ca7ec83c3d6\",\n    \"messageId\": \"e7f8a9b0-c1d2-4456-8f78-ab9012345cd6\",\n    \"timestamp\": \"2026-05-15T14:11:00+05:30\",\n    \"bppId\": \"bpp.example.com\",\n    \"bppUri\": \"http://onix-bpp:8082/bpp/receiver\"\n  },\n  \"message\": {\n    \"contract\": {\n      \"id\": \"contract-vs-10dce2d5\",\n      \"status\": {\n        \"code\": \"DRAFT\"\n      },\n      \"commitments\": [\n        {\n          \"id\": \"commitment-uc2-identity-001\",\n          \"status\": {\n            \"descriptor\": {\n              \"code\": \"DRAFT\"\n            }\n          },\n          \"resources\": [\n            {\n              \"id\": \"res-vs-identity-001\",\n              \"quantity\": {\n                \"count\": 1\n              }\n            }\n          ],\n          \"offer\": {\n            \"id\": \"offer-vs-identity-instant-001\",\n            \"resourceIds\": [\n              \"res-vs-identity-001\"\n            ]\n          }\n        }\n      ],\n      \"consideration\": [\n        {\n          \"id\": \"cons-vs-identity-cat-001\",\n          \"status\": {\n            \"code\": \"PENDING\"\n          },\n          \"considerationAttributes\": {\n            \"@context\": \"https://schema.beckn.io/PriceSpecification/v2.1/context.jsonld\",\n            \"@type\": \"PriceSpecification\",\n            \"price\": 150,\n            \"priceCurrency\": \"INR\",\n            \"valueAddedTaxIncluded\": false,\n            \"description\": \"Per-request Aadhaar eKYC fee, excluding GST\"\n          }\n        }\n      ],\n      \"participants\": [\n        {\n          \"id\": \"part-uc2-greenmove-001\",\n          \"role\": \"REQUESTER\",\n          \"descriptor\": {\n            \"name\": \"GreenMove EV Fleet Operations Pvt. Ltd.\",\n            \"shortDesc\": \"Requesting NP — EV fleet operator, Pune\"\n          }\n        },\n        {\n          \"id\": \"part-uc2-idverify-001\",\n          \"role\": \"VERIFIER\",\n          \"descriptor\": {\n            \"name\": \"IDVerify Solutions Pvt. Ltd.\",\n            \"shortDesc\": \"Verification service provider — UIDAI-authorised AUA, DPDPA 2023 compliant\"\n          }\n        },\n        {\n          \"id\": \"part-uc2-priya-sharma-001\",\n          \"role\": \"SUBJECT\",\n          \"descriptor\": {\n            \"name\": \"Priya Sharma\",\n            \"shortDesc\": \"Driver subject — Aadhaar eKYC requested by GreenMove EV Fleet\"\n          }\n        }\n      ],\n      \"contractAttributes\": {\n        \"@context\": \"https://raw.githubusercontent.com/abhimail/beckn-schemas/refs/heads/main/verification-service/VerificationContract/v2.1/context.jsonld\",\n        \"@type\": \"vc:VerificationContract\",\n        \"subject\": {\n          \"name\": \"Priya Sharma\",\n          \"dateOfBirth\": \"1998-07-22\",\n          \"identifiers\": [\n            {\n              \"type\": \"AADHAAR\",\n              \"value\": \"XXXX XXXX 5678\",\n              \"maskedValue\": \"XXXX-XXXX-4567\"\n            },\n            {\n              \"type\": \"MOBILE\",\n              \"value\": \"XXXXXXX4521\",\n              \"maskedValue\": \"XXXXXXX8832\"\n            }\n          ]\n        },\n        \"purpose\": {\n          \"code\": \"KYC_COMPLIANCE\",\n          \"description\": \"Aadhaar eKYC for EV fleet driver onboarding compliance\"\n        },\n        \"consentReference\": {\n          \"consentId\": \"consent-uc2-ps-001\",\n          \"mechanism\": \"AADHAAR_EKYC\",\n          \"grantedAt\": \"2026-05-15T14:10:00+05:30\",\n          \"expiresAt\": \"2026-05-15T15:10:00+05:30\",\n          \"scope\": [\n            \"IDENTITY\"\n          ]\n        },\n        \"requestedBy\": {\n          \"organizationName\": \"GreenMove EV Fleet Operations Pvt. Ltd.\",\n          \"organizationType\": \"EMPLOYER\",\n          \"referenceId\": \"driver-application-gm-2026-0515-007\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{bap_adapter_url}}/init",
+              "host": [
+                "{{bap_adapter_url}}"
+              ],
+              "path": [
+                "init"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "confirm",
+      "item": [
+        {
+          "name": "confirm",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"context\": {\n    \"networkId\": \"verification-service\",\n    \"action\": \"confirm\",\n    \"version\": \"2.0.0\",\n    \"bapId\": \"bap.example.com\",\n    \"bapUri\": \"http://onix-bap:8081/bap/receiver\",\n    \"transactionId\": \"10dce2d5-4100-420c-9154-2ca7ec83c3d6\",\n    \"messageId\": \"a9b0c1d2-e3f4-4678-8b90-cd1234567ef8\",\n    \"timestamp\": \"2026-05-15T14:12:00+05:30\",\n    \"bppId\": \"bpp.example.com\",\n    \"bppUri\": \"http://onix-bpp:8082/bpp/receiver\"\n  },\n  \"message\": {\n    \"contract\": {\n      \"id\": \"contract-vs-10dce2d5\",\n      \"status\": {\n        \"code\": \"ACTIVE\"\n      },\n      \"commitments\": [\n        {\n          \"id\": \"commitment-uc2-identity-001\",\n          \"status\": {\n            \"descriptor\": {\n              \"code\": \"ACTIVE\"\n            }\n          },\n          \"resources\": [\n            {\n              \"id\": \"res-vs-identity-001\",\n              \"quantity\": {\n                \"count\": 1\n              }\n            }\n          ],\n          \"offer\": {\n            \"id\": \"offer-vs-identity-instant-001\",\n            \"resourceIds\": [\n              \"res-vs-identity-001\"\n            ]\n          }\n        }\n      ],\n      \"consideration\": [\n        {\n          \"id\": \"cons-vs-identity-cat-001\",\n          \"status\": {\n            \"code\": \"ACTIVE\"\n          },\n          \"considerationAttributes\": {\n            \"@context\": \"https://schema.beckn.io/PriceSpecification/v2.1/context.jsonld\",\n            \"@type\": \"PriceSpecification\",\n            \"price\": 150,\n            \"priceCurrency\": \"INR\",\n            \"valueAddedTaxIncluded\": false,\n            \"description\": \"Per-request Aadhaar eKYC fee, excluding GST\",\n            \"selectedPaymentMethod\": \"UPI\",\n            \"transactionRef\": \"pay-ref-vs-10dce2d5\",\n            \"paymentAuthorisation\": {\n              \"authCode\": \"pay-ref-vs-10dce2d5\",\n              \"authProvider\": \"ICICI_UPI\",\n              \"authTimestamp\": \"2026-05-15T14:11:58+05:30\",\n              \"authAmount\": 150\n            }\n          }\n        }\n      ],\n      \"participants\": [\n        {\n          \"id\": \"part-uc2-greenmove-001\",\n          \"role\": \"REQUESTER\",\n          \"descriptor\": {\n            \"name\": \"GreenMove EV Fleet Operations Pvt. Ltd.\",\n            \"shortDesc\": \"Requesting NP — EV fleet operator, Pune\"\n          }\n        },\n        {\n          \"id\": \"part-uc2-idverify-001\",\n          \"role\": \"VERIFIER\",\n          \"descriptor\": {\n            \"name\": \"IDVerify Solutions Pvt. Ltd.\",\n            \"shortDesc\": \"Verification service provider — UIDAI-authorised AUA, DPDPA 2023 compliant\"\n          }\n        },\n        {\n          \"id\": \"part-uc2-priya-sharma-001\",\n          \"role\": \"SUBJECT\",\n          \"descriptor\": {\n            \"name\": \"Priya Sharma\",\n            \"shortDesc\": \"Driver subject — Aadhaar eKYC requested by GreenMove EV Fleet\"\n          }\n        }\n      ],\n      \"contractAttributes\": {\n        \"@context\": \"https://raw.githubusercontent.com/abhimail/beckn-schemas/refs/heads/main/verification-service/VerificationContract/v2.1/context.jsonld\",\n        \"@type\": \"vc:VerificationContract\",\n        \"subject\": {\n          \"name\": \"Priya Sharma\",\n          \"dateOfBirth\": \"1998-07-22\",\n          \"identifiers\": [\n            {\n              \"type\": \"AADHAAR\",\n              \"value\": \"XXXX XXXX 5678\",\n              \"maskedValue\": \"XXXX-XXXX-4567\"\n            },\n            {\n              \"type\": \"MOBILE\",\n              \"value\": \"XXXXXXX4521\",\n              \"maskedValue\": \"XXXXXXX8832\"\n            }\n          ]\n        },\n        \"purpose\": {\n          \"code\": \"KYC_COMPLIANCE\",\n          \"description\": \"Aadhaar eKYC for EV fleet driver onboarding compliance\"\n        },\n        \"consentReference\": {\n          \"consentId\": \"consent-uc2-ps-001\",\n          \"mechanism\": \"AADHAAR_EKYC\",\n          \"grantedAt\": \"2026-05-15T14:10:00+05:30\",\n          \"expiresAt\": \"2026-05-15T15:10:00+05:30\",\n          \"scope\": [\n            \"IDENTITY\"\n          ]\n        },\n        \"requestedBy\": {\n          \"organizationName\": \"GreenMove EV Fleet Operations Pvt. Ltd.\",\n          \"organizationType\": \"EMPLOYER\",\n          \"referenceId\": \"driver-application-gm-2026-0515-007\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{bap_adapter_url}}/confirm",
+              "host": [
+                "{{bap_adapter_url}}"
+              ],
+              "path": [
+                "confirm"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "status",
+      "item": [
+        {
+          "name": "status",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"context\": {\n    \"networkId\": \"verification-service\",\n    \"action\": \"status\",\n    \"version\": \"2.0.0\",\n    \"bapId\": \"bap.example.com\",\n    \"bapUri\": \"http://onix-bap:8081/bap/receiver\",\n    \"transactionId\": \"10dce2d5-4100-420c-9154-2ca7ec83c3d6\",\n    \"messageId\": \"c1d2e3f4-a5b6-4890-8d12-ef3456789ab0\",\n    \"timestamp\": \"2026-05-15T14:15:00+05:30\",\n    \"bppId\": \"bpp.example.com\",\n    \"bppUri\": \"http://onix-bpp:8082/bpp/receiver\"\n  },\n  \"message\": {\n    \"contract\": {\n      \"id\": \"contract-vs-10dce2d5\",\n      \"commitments\": [\n        {\n          \"id\": \"commitment-uc2-identity-001\",\n          \"status\": {\n            \"descriptor\": {\n              \"code\": \"ACTIVE\"\n            }\n          },\n          \"resources\": [\n            {\n              \"id\": \"res-vs-identity-001\",\n              \"quantity\": {\n                \"count\": 1\n              }\n            }\n          ],\n          \"offer\": {\n            \"id\": \"offer-vs-identity-instant-001\",\n            \"resourceIds\": [\n              \"res-vs-identity-001\"\n            ]\n          }\n        }\n      ]\n    }\n  }\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{bap_adapter_url}}/status",
+              "host": [
+                "{{bap_adapter_url}}"
+              ],
+              "path": [
+                "status"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "networkId",
+      "value": "verification-service"
+    },
+    {
+      "key": "version",
+      "value": "2.0.0"
+    },
+    {
+      "key": "bapId",
+      "value": "bap.example.com"
+    },
+    {
+      "key": "bapUri",
+      "value": "http://onix-bap:8081/bap/receiver"
+    },
+    {
+      "key": "bppId",
+      "value": "bpp.example.com"
+    },
+    {
+      "key": "bppUri",
+      "value": "http://onix-bpp:8082/bpp/receiver"
+    },
+    {
+      "key": "transactionId",
+      "value": "10dce2d5-4100-420c-9154-2ca7ec83c3d6"
+    },
+    {
+      "key": "bap_adapter_url",
+      "value": "http://localhost:8081/bap/caller"
+    }
+  ]
+}

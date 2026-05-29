@@ -1,0 +1,126 @@
+{
+  "context": {
+    "networkId": "verification-service",
+    "action": "init",
+    "version": "2.0.0",
+    "bapId": "bap.example.com",
+    "bapUri": "http://onix-bap:8081/bap/receiver",
+    "transactionId": "10dce2d5-4100-420c-9154-2ca7ec83c3d6",
+    "messageId": "e7f8a9b0-c1d2-4456-8f78-ab9012345cd6",
+    "timestamp": "2026-05-15T14:11:00+05:30",
+    "bppId": "bpp.example.com",
+    "bppUri": "http://onix-bpp:8082/bpp/receiver"
+  },
+  "message": {
+    "contract": {
+      "id": "contract-vs-10dce2d5",
+      "status": {
+        "code": "DRAFT"
+      },
+      "commitments": [
+        {
+          "id": "commitment-uc2-identity-001",
+          "status": {
+            "descriptor": {
+              "code": "DRAFT"
+            }
+          },
+          "resources": [
+            {
+              "id": "res-vs-identity-001",
+              "quantity": {
+                "count": 1
+              }
+            }
+          ],
+          "offer": {
+            "id": "offer-vs-identity-instant-001",
+            "resourceIds": [
+              "res-vs-identity-001"
+            ]
+          }
+        }
+      ],
+      "consideration": [
+        {
+          "id": "cons-vs-identity-cat-001",
+          "status": {
+            "code": "PENDING"
+          },
+          "considerationAttributes": {
+            "@context": "https://schema.beckn.io/PriceSpecification/v2.1/context.jsonld",
+            "@type": "PriceSpecification",
+            "price": 150,
+            "priceCurrency": "INR",
+            "valueAddedTaxIncluded": false,
+            "description": "Per-request Aadhaar eKYC fee, excluding GST"
+          }
+        }
+      ],
+      "participants": [
+        {
+          "id": "part-uc2-greenmove-001",
+          "role": "REQUESTER",
+          "descriptor": {
+            "name": "GreenMove EV Fleet Operations Pvt. Ltd.",
+            "shortDesc": "Requesting NP — EV fleet operator, Pune"
+          }
+        },
+        {
+          "id": "part-uc2-idverify-001",
+          "role": "VERIFIER",
+          "descriptor": {
+            "name": "IDVerify Solutions Pvt. Ltd.",
+            "shortDesc": "Verification service provider — UIDAI-authorised AUA, DPDPA 2023 compliant"
+          }
+        },
+        {
+          "id": "part-uc2-priya-sharma-001",
+          "role": "SUBJECT",
+          "descriptor": {
+            "name": "Priya Sharma",
+            "shortDesc": "Driver subject — Aadhaar eKYC requested by GreenMove EV Fleet"
+          }
+        }
+      ],
+      "contractAttributes": {
+        "@context": "https://raw.githubusercontent.com/abhimail/beckn-schemas/refs/heads/main/verification-service/VerificationContract/v2.1/context.jsonld",
+        "@type": "vc:VerificationContract",
+        "subject": {
+          "name": "Priya Sharma",
+          "dateOfBirth": "1998-07-22",
+          "identifiers": [
+            {
+              "type": "AADHAAR",
+              "value": "XXXX XXXX 5678",
+              "maskedValue": "XXXX-XXXX-4567"
+            },
+            {
+              "type": "MOBILE",
+              "value": "XXXXXXX4521",
+              "maskedValue": "XXXXXXX8832"
+            }
+          ]
+        },
+        "purpose": {
+          "code": "KYC_COMPLIANCE",
+          "description": "Aadhaar eKYC for EV fleet driver onboarding compliance"
+        },
+        "consentReference": {
+          "consentId": "consent-uc2-ps-001",
+          "mechanism": "AADHAAR_EKYC",
+          "grantedAt": "2026-05-15T14:10:00+05:30",
+          "expiresAt": "2026-05-15T15:10:00+05:30",
+          "scope": [
+            "IDENTITY"
+          ]
+        },
+        "requestedBy": {
+          "organizationName": "GreenMove EV Fleet Operations Pvt. Ltd.",
+          "organizationType": "EMPLOYER",
+          "referenceId": "driver-application-gm-2026-0515-007"
+        }
+      }
+    }
+  }
+}
