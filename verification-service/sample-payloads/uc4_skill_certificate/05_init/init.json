@@ -1,0 +1,131 @@
+{
+  "context": {
+    "networkId": "verification-service",
+    "action": "init",
+    "version": "2.0.0",
+    "bapId": "bap.example.com",
+    "bapUri": "http://onix-bap:8081/bap/receiver",
+    "transactionId": "10dce2d5-4100-420c-9154-2ca7ec83c3d6",
+    "messageId": "c7d8e9f0-a1b2-4456-8d78-ef9012345ab6",
+    "timestamp": "2026-05-20T09:31:00+05:30",
+    "bppId": "bpp.example.com",
+    "bppUri": "http://onix-bpp:8082/bpp/receiver"
+  },
+  "message": {
+    "contract": {
+      "id": "contract-vs-10dce2d5",
+      "status": {
+        "code": "DRAFT"
+      },
+      "commitments": [
+        {
+          "id": "commitment-uc4-skill-001",
+          "status": {
+            "descriptor": {
+              "code": "DRAFT"
+            }
+          },
+          "resources": [
+            {
+              "id": "res-vs-skill-001",
+              "quantity": {
+                "count": 1
+              }
+            }
+          ],
+          "offer": {
+            "id": "offer-vs-skill-hybrid-001",
+            "resourceIds": [
+              "res-vs-skill-001"
+            ]
+          }
+        }
+      ],
+      "consideration": [
+        {
+          "id": "cons-vs-skill-cat-001",
+          "status": {
+            "code": "PENDING"
+          },
+          "considerationAttributes": {
+            "@context": "https://schema.beckn.io/PriceSpecification/v2.1/context.jsonld",
+            "@type": "PriceSpecification",
+            "price": 350,
+            "priceCurrency": "INR",
+            "valueAddedTaxIncluded": false,
+            "description": "Per-request skill certificate verification fee, excluding GST"
+          }
+        }
+      ],
+      "participants": [
+        {
+          "id": "part-uc4-zapcharge-001",
+          "role": "REQUESTER",
+          "descriptor": {
+            "name": "ZapCharge Fleet Services Pvt. Ltd.",
+            "shortDesc": "Requesting NP — staffing and fleet operations platform, Ahmedabad"
+          }
+        },
+        {
+          "id": "part-uc4-certverify-001",
+          "role": "VERIFIER",
+          "descriptor": {
+            "name": "CertVerify India Pvt. Ltd.",
+            "shortDesc": "Verification service provider — NCVT-empanelled skill certificate verifier"
+          }
+        },
+        {
+          "id": "part-uc4-ankit-patel-001",
+          "role": "SUBJECT",
+          "descriptor": {
+            "name": "Ankit Patel",
+            "shortDesc": "Electrician subject — ITI certificate verification requested by ZapCharge for job listing"
+          }
+        }
+      ],
+      "contractAttributes": {
+        "@context": "https://schema.beckn.io/VerificationContract/v2.1/context.jsonld",
+        "@type": "vc:VerificationContract",
+        "subject": {
+          "name": "Ankit Patel",
+          "dateOfBirth": "1999-04-20",
+          "identifiers": [
+            {
+              "type": "CERTIFICATE_NUMBER",
+              "value": "NCVT-ITI-2022-GJ-7891",
+              "maskedValue": "NCVT-ITI-2022-GJ-7891"
+            },
+            {
+              "type": "MOBILE",
+              "value": "XXXXXXX4521",
+              "maskedValue": "XXXXXXX6382"
+            }
+          ]
+        },
+        "purpose": {
+          "code": "PLATFORM_ONBOARDING",
+          "description": "ITI skill certificate verification for electrician job listing on staffing platform"
+        },
+        "consentReference": {
+          "consentId": "consent-uc4-ap-001",
+          "mechanism": "OTP",
+          "grantedAt": "2026-05-20T09:20:00+05:30",
+          "expiresAt": "2026-05-20T10:20:00+05:30",
+          "scope": [
+            "SKILL_CERTIFICATE"
+          ]
+        },
+        "requestedBy": {
+          "participantId": "part-uc4-zapcharge-001",
+          "role": "REQUESTER"
+        },
+        "certificateInput": {
+          "certificateNumber": "NSDC-EV-2024-78901",
+          "holderName": "Arjun Mehta",
+          "issuingBody": "ASDC — Automotive Skills Development Council",
+          "issueYear": 2024
+        }
+      }
+    }
+  }
+}

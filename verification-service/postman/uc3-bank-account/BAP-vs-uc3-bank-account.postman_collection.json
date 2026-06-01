@@ -1,0 +1,220 @@
+{
+  "info": {
+    "_postman_id": "3fbf117f-8401-4e93-a890-7db061cf37ea",
+    "name": "BAP:VS UC3 — Bank Account Verification",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "discover",
+      "item": [
+        {
+          "name": "discover",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"context\": {\n    \"networkId\": \"{{networkId}}\",\n    \"action\": \"discover\",\n    \"version\": \"{{version}}\",\n    \"bapId\": \"{{bapId}}\",\n    \"bapUri\": \"{{bapUri}}\",\n    \"transactionId\": \"{{transactionId}}\",\n    \"messageId\": \"{{$guid}}\",\n    \"timestamp\": \"{{$isoTimestamp}}\",\n    \"schemaContext\": [\n      \"https://schema.beckn.io/VerificationResource/v2.1/context.jsonld\",\n      \"https://schema.beckn.io/VerificationOffer/v2.1/context.jsonld\"\n    ]\n  },\n  \"message\": {\n    \"intent\": {\n      \"filters\": {\n        \"type\": \"jsonpath\",\n        \"expression\": \"$.catalogs[*].resources[*] ? (@.resourceAttributes.verificationType.code == \\\"BANK_ACCOUNT\\\")\"\n      },\n      \"textSearch\": \"bank account verification NPCI penny drop India\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{bap_adapter_url}}/discover",
+              "host": [
+                "{{bap_adapter_url}}"
+              ],
+              "path": [
+                "discover"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "item": [
+        {
+          "name": "select",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"context\": {\n    \"networkId\": \"{{networkId}}\",\n    \"action\": \"select\",\n    \"version\": \"{{version}}\",\n    \"bapId\": \"{{bapId}}\",\n    \"bapUri\": \"{{bapUri}}\",\n    \"transactionId\": \"{{transactionId}}\",\n    \"messageId\": \"{{$guid}}\",\n    \"timestamp\": \"{{$isoTimestamp}}\",\n    \"bppId\": \"{{bppId}}\",\n    \"bppUri\": \"{{bppUri}}\"\n  },\n  \"message\": {\n    \"contract\": {\n      \"status\": {\n        \"code\": \"DRAFT\"\n      },\n      \"commitments\": [\n        {\n          \"id\": \"commitment-uc3-bank-001\",\n          \"status\": {\n            \"descriptor\": {\n              \"code\": \"DRAFT\"\n            }\n          },\n          \"resources\": [\n            {\n              \"id\": \"res-vs-bank-001\",\n              \"quantity\": {\n                \"count\": 1\n              }\n            }\n          ],\n          \"offer\": {\n            \"id\": \"offer-vs-bank-std-001\",\n            \"resourceIds\": [\n              \"res-vs-bank-001\"\n            ]\n          }\n        }\n      ],\n      \"participants\": [\n        {\n          \"id\": \"part-uc3-payrollsuite-001\"\n        }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{bap_adapter_url}}/select",
+              "host": [
+                "{{bap_adapter_url}}"
+              ],
+              "path": [
+                "select"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "init",
+      "item": [
+        {
+          "name": "init",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"context\": {\n    \"networkId\": \"{{networkId}}\",\n    \"action\": \"init\",\n    \"version\": \"{{version}}\",\n    \"bapId\": \"{{bapId}}\",\n    \"bapUri\": \"{{bapUri}}\",\n    \"transactionId\": \"{{transactionId}}\",\n    \"messageId\": \"{{$guid}}\",\n    \"timestamp\": \"{{$isoTimestamp}}\",\n    \"bppId\": \"{{bppId}}\",\n    \"bppUri\": \"{{bppUri}}\"\n  },\n  \"message\": {\n    \"contract\": {\n      \"id\": \"contract-vs-10dce2d5\",\n      \"status\": {\n        \"code\": \"DRAFT\"\n      },\n      \"commitments\": [\n        {\n          \"id\": \"commitment-uc3-bank-001\",\n          \"status\": {\n            \"descriptor\": {\n              \"code\": \"DRAFT\"\n            }\n          },\n          \"resources\": [\n            {\n              \"id\": \"res-vs-bank-001\",\n              \"quantity\": {\n                \"count\": 1\n              }\n            }\n          ],\n          \"offer\": {\n            \"id\": \"offer-vs-bank-std-001\",\n            \"resourceIds\": [\n              \"res-vs-bank-001\"\n            ]\n          }\n        }\n      ],\n      \"consideration\": [\n        {\n          \"id\": \"cons-vs-bank-cat-001\",\n          \"status\": {\n            \"code\": \"PENDING\"\n          },\n          \"considerationAttributes\": {\n            \"@context\": \"https://schema.beckn.io/PriceSpecification/v2.1/context.jsonld\",\n            \"@type\": \"PriceSpecification\",\n            \"price\": 100,\n            \"priceCurrency\": \"INR\",\n            \"valueAddedTaxIncluded\": false,\n            \"description\": \"Per-request bank account verification fee via NPCI penny drop, excluding GST\"\n          }\n        }\n      ],\n      \"participants\": [\n        {\n          \"id\": \"part-uc3-cityexpress-001\",\n          \"role\": \"REQUESTER\",\n          \"descriptor\": {\n            \"name\": \"CityExpress Bus Services Pvt. Ltd.\",\n            \"shortDesc\": \"Requesting NP — intercity bus operator; verifying driver bank account for salary setup\"\n          }\n        },\n        {\n          \"id\": \"part-uc3-bankverify-001\",\n          \"role\": \"VERIFIER\",\n          \"descriptor\": {\n            \"name\": \"BankVerify India Pvt. Ltd.\",\n            \"shortDesc\": \"Verification service provider — NPCI-certified bank account verification aggregator\"\n          }\n        },\n        {\n          \"id\": \"part-uc3-ravi-kumar-001\",\n          \"role\": \"SUBJECT\",\n          \"descriptor\": {\n            \"name\": \"Ravi Kumar\",\n            \"shortDesc\": \"Driver subject — bank account verification requested by CityExpress for salary disbursement\"\n          }\n        }\n      ],\n      \"contractAttributes\": {\n        \"@context\": \"https://schema.beckn.io/VerificationContract/v2.1/context.jsonld\",\n        \"@type\": \"vc:VerificationContract\",\n        \"subject\": {\n          \"name\": \"Ravi Kumar\",\n          \"dateOfBirth\": \"1992-03-15\",\n          \"identifiers\": [\n            {\n              \"type\": \"ACCOUNT_NUMBER\",\n              \"value\": \"123456784321\",\n              \"maskedValue\": \"XXXX-XXXX-4321\"\n            },\n            {\n              \"type\": \"IFSC_CODE\",\n              \"value\": \"SBIN0002468\"\n            },\n            {\n              \"type\": \"MOBILE\",\n              \"value\": \"XXXXXXX4521\",\n              \"maskedValue\": \"XXXXXXX7654\"\n            }\n          ]\n        },\n        \"purpose\": {\n          \"code\": \"EMPLOYMENT_ONBOARDING\",\n          \"description\": \"Bank account verification for salary disbursement setup for CityExpress driver onboarding\"\n        },\n        \"consentReference\": {\n          \"consentId\": \"consent-uc3-rk-001\",\n          \"mechanism\": \"OTP\",\n          \"grantedAt\": \"2026-05-28T14:10:00+05:30\",\n          \"expiresAt\": \"2026-05-28T15:10:00+05:30\",\n          \"scope\": [\n            \"BANK_ACCOUNT\"\n          ]\n        },\n        \"requestedBy\": {\n          \"participantId\": \"part-uc3-cityexpress-001\",\n          \"role\": \"REQUESTER\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{bap_adapter_url}}/init",
+              "host": [
+                "{{bap_adapter_url}}"
+              ],
+              "path": [
+                "init"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "confirm",
+      "item": [
+        {
+          "name": "confirm",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"context\": {\n    \"networkId\": \"{{networkId}}\",\n    \"action\": \"confirm\",\n    \"version\": \"{{version}}\",\n    \"bapId\": \"{{bapId}}\",\n    \"bapUri\": \"{{bapUri}}\",\n    \"transactionId\": \"{{transactionId}}\",\n    \"messageId\": \"{{$guid}}\",\n    \"timestamp\": \"{{$isoTimestamp}}\",\n    \"bppId\": \"{{bppId}}\",\n    \"bppUri\": \"{{bppUri}}\"\n  },\n  \"message\": {\n    \"contract\": {\n      \"id\": \"contract-vs-10dce2d5\",\n      \"status\": {\n        \"code\": \"ACTIVE\"\n      },\n      \"commitments\": [\n        {\n          \"id\": \"commitment-uc3-bank-001\",\n          \"status\": {\n            \"descriptor\": {\n              \"code\": \"ACTIVE\"\n            }\n          },\n          \"resources\": [\n            {\n              \"id\": \"res-vs-bank-001\",\n              \"quantity\": {\n                \"count\": 1\n              }\n            }\n          ],\n          \"offer\": {\n            \"id\": \"offer-vs-bank-std-001\",\n            \"resourceIds\": [\n              \"res-vs-bank-001\"\n            ]\n          }\n        }\n      ],\n      \"consideration\": [\n        {\n          \"id\": \"cons-vs-bank-cat-001\",\n          \"status\": {\n            \"code\": \"ACTIVE\"\n          },\n          \"considerationAttributes\": {\n            \"@context\": \"https://schema.beckn.io/PriceSpecification/v2.1/context.jsonld\",\n            \"@type\": \"PriceSpecification\",\n            \"price\": 100,\n            \"priceCurrency\": \"INR\",\n            \"valueAddedTaxIncluded\": false,\n            \"description\": \"Per-request bank account verification fee via NPCI penny drop, excluding GST\",\n            \"selectedPaymentMethod\": \"NEFT\",\n            \"transactionRef\": \"pay-ref-vs-10dce2d5\",\n            \"paymentAuthorisation\": {\n              \"authCode\": \"pay-ref-vs-10dce2d5\",\n              \"authProvider\": \"AXIS_NEFT\",\n              \"authTimestamp\": \"2026-05-28T14:14:58+05:30\",\n              \"authAmount\": 100\n            }\n          }\n        }\n      ],\n      \"participants\": [\n        {\n          \"id\": \"part-uc3-cityexpress-001\",\n          \"role\": \"REQUESTER\",\n          \"descriptor\": {\n            \"name\": \"CityExpress Bus Services Pvt. Ltd.\",\n            \"shortDesc\": \"Requesting NP — intercity bus operator; verifying driver bank account for salary setup\"\n          }\n        },\n        {\n          \"id\": \"part-uc3-bankverify-001\",\n          \"role\": \"VERIFIER\",\n          \"descriptor\": {\n            \"name\": \"BankVerify India Pvt. Ltd.\",\n            \"shortDesc\": \"Verification service provider — NPCI-certified bank account verification aggregator\"\n          }\n        },\n        {\n          \"id\": \"part-uc3-ravi-kumar-001\",\n          \"role\": \"SUBJECT\",\n          \"descriptor\": {\n            \"name\": \"Ravi Kumar\",\n            \"shortDesc\": \"Driver subject — bank account verification requested by CityExpress for salary disbursement\"\n          }\n        }\n      ],\n      \"contractAttributes\": {\n        \"@context\": \"https://schema.beckn.io/VerificationContract/v2.1/context.jsonld\",\n        \"@type\": \"vc:VerificationContract\",\n        \"subject\": {\n          \"name\": \"Ravi Kumar\",\n          \"dateOfBirth\": \"1992-03-15\",\n          \"identifiers\": [\n            {\n              \"type\": \"ACCOUNT_NUMBER\",\n              \"value\": \"123456784321\",\n              \"maskedValue\": \"XXXX-XXXX-4321\"\n            },\n            {\n              \"type\": \"IFSC_CODE\",\n              \"value\": \"SBIN0002468\"\n            },\n            {\n              \"type\": \"MOBILE\",\n              \"value\": \"XXXXXXX4521\",\n              \"maskedValue\": \"XXXXXXX7654\"\n            }\n          ]\n        },\n        \"purpose\": {\n          \"code\": \"EMPLOYMENT_ONBOARDING\",\n          \"description\": \"Bank account verification for salary disbursement setup for CityExpress driver onboarding\"\n        },\n        \"consentReference\": {\n          \"consentId\": \"consent-uc3-rk-001\",\n          \"mechanism\": \"OTP\",\n          \"grantedAt\": \"2026-05-28T14:10:00+05:30\",\n          \"expiresAt\": \"2026-05-28T15:10:00+05:30\",\n          \"scope\": [\n            \"BANK_ACCOUNT\"\n          ]\n        },\n        \"requestedBy\": {\n          \"participantId\": \"part-uc3-cityexpress-001\",\n          \"role\": \"REQUESTER\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{bap_adapter_url}}/confirm",
+              "host": [
+                "{{bap_adapter_url}}"
+              ],
+              "path": [
+                "confirm"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "status",
+      "item": [
+        {
+          "name": "status",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"context\": {\n    \"networkId\": \"{{networkId}}\",\n    \"action\": \"status\",\n    \"version\": \"{{version}}\",\n    \"bapId\": \"{{bapId}}\",\n    \"bapUri\": \"{{bapUri}}\",\n    \"transactionId\": \"{{transactionId}}\",\n    \"messageId\": \"{{$guid}}\",\n    \"timestamp\": \"{{$isoTimestamp}}\",\n    \"bppId\": \"{{bppId}}\",\n    \"bppUri\": \"{{bppUri}}\"\n  },\n  \"message\": {\n    \"contract\": {\n      \"id\": \"contract-vs-10dce2d5\",\n      \"commitments\": [\n        {\n          \"id\": \"commitment-uc3-bank-001\",\n          \"status\": {\n            \"descriptor\": {\n              \"code\": \"ACTIVE\"\n            }\n          },\n          \"resources\": [\n            {\n              \"id\": \"res-vs-bank-001\",\n              \"quantity\": {\n                \"count\": 1\n              }\n            }\n          ],\n          \"offer\": {\n            \"id\": \"offer-vs-bank-std-001\",\n            \"resourceIds\": [\n              \"res-vs-bank-001\"\n            ]\n          }\n        }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{bap_adapter_url}}/status",
+              "host": [
+                "{{bap_adapter_url}}"
+              ],
+              "path": [
+                "status"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "networkId",
+      "value": "verification-service"
+    },
+    {
+      "key": "version",
+      "value": "2.0.0"
+    },
+    {
+      "key": "bapId",
+      "value": "bap.example.com"
+    },
+    {
+      "key": "bapUri",
+      "value": "http://onix-bap:8081/bap/receiver"
+    },
+    {
+      "key": "bppId",
+      "value": "bpp.example.com"
+    },
+    {
+      "key": "bppUri",
+      "value": "http://onix-bpp:8082/bpp/receiver"
+    },
+    {
+      "key": "transactionId",
+      "value": "10dce2d5-4100-420c-9154-2ca7ec83c3d6"
+    },
+    {
+      "key": "bap_adapter_url",
+      "value": "http://localhost:8081/bap/caller"
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "context": {
+    "networkId": "verification-service",
+    "action": "on_confirm",
+    "version": "2.0.0",
+    "bapId": "bap.example.com",
+    "bapUri": "http://onix-bap:8081/bap/receiver",
+    "transactionId": "10dce2d5-4100-420c-9154-2ca7ec83c3d6",
+    "messageId": "c9d0e1f2-a3b4-4789-9fa1-de2345678fa8",
+    "timestamp": "2026-05-28T14:15:06+05:30",
+    "bppId": "bpp.example.com",
+    "bppUri": "http://onix-bpp:8082/bpp/receiver",
+    "schemaContext": [
+      "https://schema.beckn.io/VerificationPerformance/v2.1/context.jsonld"
+    ]
+  },
+  "message": {
+    "contract": {
+      "id": "contract-vs-10dce2d5",
+      "status": {
+        "code": "ACTIVE"
+      },
+      "descriptor": {
+        "name": "Bank Account Verification — CityExpress / Ravi Kumar",
+        "shortDesc": "Penny drop initiated — awaiting NPCI IMPS confirmation"
+      },
+      "commitments": [
+        {
+          "id": "commitment-uc3-bank-001",
+          "status": {
+            "descriptor": {
+              "code": "ACTIVE"
+            }
+          },
+          "resources": [
+            {
+              "id": "res-vs-bank-001",
+              "quantity": {
+                "count": 1
+              }
+            }
+          ],
+          "offer": {
+            "id": "offer-vs-bank-std-001",
+            "resourceIds": [
+              "res-vs-bank-001"
+            ]
+          }
+        }
+      ],
+      "consideration": [
+        {
+          "id": "cons-vs-bank-cat-001",
+          "status": {
+            "code": "COMMITTED"
+          },
+          "considerationAttributes": {
+            "@context": "https://schema.beckn.io/PriceSpecification/v2.1/context.jsonld",
+            "@type": "PriceSpecification",
+            "price": 100,
+            "priceCurrency": "INR",
+            "valueAddedTaxIncluded": false,
+            "description": "Per-request bank account verification fee via NPCI penny drop, excluding GST",
+            "selectedPaymentMethod": "NEFT",
+            "transactionRef": "pay-ref-vs-10dce2d5",
+            "paymentAuthorisation": {
+              "authCode": "pay-ref-vs-10dce2d5",
+              "authProvider": "AXIS_NEFT",
+              "authTimestamp": "2026-05-28T14:14:58+05:30",
+              "authAmount": 100
+            }
+          }
+        }
+      ],
+      "participants": [
+        {
+          "id": "part-uc3-cityexpress-001",
+          "role": "REQUESTER",
+          "descriptor": {
+            "name": "CityExpress Bus Services Pvt. Ltd.",
+            "shortDesc": "Requesting NP — intercity bus operator; verifying driver bank account for salary setup"
+          }
+        },
+        {
+          "id": "part-uc3-bankverify-001",
+          "role": "VERIFIER",
+          "descriptor": {
+            "name": "BankVerify India Pvt. Ltd.",
+            "shortDesc": "Verification service provider — NPCI-certified bank account verification aggregator"
+          }
+        },
+        {
+          "id": "part-uc3-ravi-kumar-001",
+          "role": "SUBJECT",
+          "descriptor": {
+            "name": "Ravi Kumar",
+            "shortDesc": "Driver subject — bank account verification requested by CityExpress for salary disbursement"
+          }
+        }
+      ],
+      "performance": [
+        {
+          "id": "perf-uc3-bank-001",
+          "commitmentIds": [
+            "commitment-uc3-bank-001"
+          ],
+          "status": {
+            "code": "PENDING"
+          }
+        }
+      ],
+      "contractAttributes": {
+        "@context": "https://schema.beckn.io/VerificationContract/v2.1/context.jsonld",
+        "@type": "vc:VerificationContract",
+        "subject": {
+          "name": "Ravi Kumar",
+          "dateOfBirth": "1992-03-15",
+          "identifiers": [
+            {
+              "type": "ACCOUNT_NUMBER",
+              "value": "123456784321",
+              "maskedValue": "XXXX-XXXX-4321"
+            },
+            {
+              "type": "IFSC_CODE",
+              "value": "SBIN0002468"
+            },
+            {
+              "type": "MOBILE",
+              "value": "XXXXXXX4521",
+              "maskedValue": "XXXXXXX7654"
+            }
+          ]
+        },
+        "purpose": {
+          "code": "EMPLOYMENT_ONBOARDING",
+          "description": "Bank account verification for salary disbursement setup for CityExpress driver onboarding"
+        },
+        "consentReference": {
+          "consentId": "consent-uc3-rk-001",
+          "mechanism": "OTP",
+          "grantedAt": "2026-05-28T14:10:00+05:30",
+          "expiresAt": "2026-05-28T15:10:00+05:30",
+          "scope": [
+            "BANK_ACCOUNT"
+          ]
+        },
+        "requestedBy": {
+          "participantId": "part-uc3-cityexpress-001",
+          "role": "REQUESTER"
+        },
+        "aggregateResult": {
+          "status": "INCONCLUSIVE",
+          "remarks": "Penny drop initiated via NPCI IMPS. Awaiting credit confirmation from SBI."
+        }
+      }
+    }
+  }
+}

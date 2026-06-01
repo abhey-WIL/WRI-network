@@ -1,0 +1,446 @@
+{
+  "context": {
+    "networkId": "verification-service",
+    "action": "on_discover",
+    "version": "2.0.0",
+    "bapId": "bap.example.com",
+    "bapUri": "http://onix-bap:8081/bap/receiver",
+    "transactionId": "10dce2d5-4100-420c-9154-2ca7ec83c3d6",
+    "messageId": "d4e5f6a7-b8c9-4123-8e45-fa6789012bcd",
+    "timestamp": "2026-05-12T10:15:03+05:30",
+    "bppId": "bpp.example.com",
+    "bppUri": "http://onix-bpp:8082/bpp/receiver",
+    "schemaContext": [
+      "https://schema.beckn.io/VerificationResource/v2.1/context.jsonld",
+      "https://schema.beckn.io/VerificationOffer/v2.1/context.jsonld"
+    ]
+  },
+  "message": {
+    "catalogs": [
+      {
+        "id": "cat-vs-trustverify-001",
+        "descriptor": {
+          "name": "TrustVerify India — Verification Service Catalog",
+          "shortDesc": "DL, identity, and skill certificate verification for the shared mobility sector"
+        },
+        "bppId": "bpp.example.com",
+        "bppUri": "http://onix-bpp:8082/bpp/receiver",
+        "provider": {
+          "id": "bpp.example.com",
+          "descriptor": {
+            "name": "TrustVerify India Pvt. Ltd.",
+            "shortDesc": "CERT-In empanelled verification service provider; authorised UIDAI AUA"
+          }
+        },
+        "resources": [
+          {
+            "id": "res-vs-dl-001",
+            "descriptor": {
+              "name": "Driving Licence Verification",
+              "shortDesc": "Real-time DL verification against Parivahan Sewa (MoRTH)"
+            },
+            "resourceAttributes": {
+              "@context": "https://schema.beckn.io/VerificationResource/v2.1/context.jsonld",
+              "@type": "vr:VerificationResource",
+              "verificationType": {
+                "code": "DRIVING_LICENCE",
+                "name": "Driving Licence Verification"
+              },
+              "supportedDocumentTypes": [
+                {
+                  "code": "DRIVING_LICENCE",
+                  "name": "Motor Vehicle Driving Licence"
+                }
+              ],
+              "supportedJurisdictions": [
+                {
+                  "code": "IN",
+                  "name": "India"
+                }
+              ],
+              "verificationMethod": "REAL_TIME_API",
+              "requiredInputFields": [
+                {
+                  "fieldName": "licenceNumber",
+                  "displayName": "Driving Licence Number",
+                  "fieldType": "STRING",
+                  "isRequired": true,
+                  "validationPattern": "^[A-Z]{2}[0-9]{2}[0-9]{4}[0-9]{7}$"
+                },
+                {
+                  "fieldName": "dateOfBirth",
+                  "displayName": "Date of Birth",
+                  "fieldType": "DATE",
+                  "isRequired": true
+                },
+                {
+                  "fieldName": "holderName",
+                  "displayName": "Holder Name (as on DL)",
+                  "fieldType": "STRING",
+                  "isRequired": true
+                }
+              ],
+              "authoritativeSource": {
+                "name": "Parivahan Sewa — Ministry of Road Transport and Highways",
+                "url": "https://parivahan.gov.in",
+                "type": "GOVERNMENT_DATABASE"
+              },
+              "outputFields": [
+                {
+                  "fieldName": "holderName",
+                  "displayName": "Holder Name",
+                  "fieldType": "STRING"
+                },
+                {
+                  "fieldName": "licenceNumber",
+                  "displayName": "Licence Number",
+                  "fieldType": "STRING"
+                },
+                {
+                  "fieldName": "issueDate",
+                  "displayName": "Issue Date",
+                  "fieldType": "DATE"
+                },
+                {
+                  "fieldName": "expiryDate",
+                  "displayName": "Expiry Date",
+                  "fieldType": "DATE"
+                },
+                {
+                  "fieldName": "vehicleClasses",
+                  "displayName": "Authorised Classes",
+                  "fieldType": "STRING"
+                },
+                {
+                  "fieldName": "issuingAuthority",
+                  "displayName": "Issuing RTO",
+                  "fieldType": "STRING"
+                }
+              ],
+              "complianceStandards": [
+                {
+                  "code": "IT_ACT_2000",
+                  "name": "Information Technology Act, 2000"
+                },
+                {
+                  "code": "DPDPA_2023",
+                  "name": "Digital Personal Data Protection Act, 2023"
+                }
+              ]
+            }
+          },
+          {
+            "id": "res-vs-identity-001",
+            "descriptor": {
+              "name": "Identity Verification — Aadhaar eKYC",
+              "shortDesc": "Real-time identity verification via UIDAI Aadhaar eKYC"
+            },
+            "resourceAttributes": {
+              "@context": "https://schema.beckn.io/VerificationResource/v2.1/context.jsonld",
+              "@type": "vr:VerificationResource",
+              "verificationType": {
+                "code": "IDENTITY",
+                "name": "Identity Verification"
+              },
+              "supportedDocumentTypes": [
+                {
+                  "code": "AADHAAR",
+                  "name": "Aadhaar Card"
+                },
+                {
+                  "code": "PAN",
+                  "name": "Permanent Account Number Card"
+                }
+              ],
+              "supportedJurisdictions": [
+                {
+                  "code": "IN",
+                  "name": "India"
+                }
+              ],
+              "verificationMethod": "REAL_TIME_API",
+              "requiredInputFields": [
+                {
+                  "fieldName": "aadhaarNumber",
+                  "displayName": "Aadhaar Number",
+                  "fieldType": "STRING",
+                  "isRequired": true,
+                  "validationPattern": "^[2-9][0-9]{11}$"
+                },
+                {
+                  "fieldName": "consentOtp",
+                  "displayName": "OTP (sent to registered mobile)",
+                  "fieldType": "STRING",
+                  "isRequired": true
+                }
+              ],
+              "authoritativeSource": {
+                "name": "UIDAI — Unique Identification Authority of India",
+                "url": "https://uidai.gov.in",
+                "type": "GOVERNMENT_DATABASE"
+              },
+              "outputFields": [
+                {
+                  "fieldName": "name",
+                  "displayName": "Full Name",
+                  "fieldType": "STRING"
+                },
+                {
+                  "fieldName": "dateOfBirth",
+                  "displayName": "Date of Birth",
+                  "fieldType": "DATE"
+                },
+                {
+                  "fieldName": "gender",
+                  "displayName": "Gender",
+                  "fieldType": "STRING"
+                },
+                {
+                  "fieldName": "address",
+                  "displayName": "Address",
+                  "fieldType": "OBJECT"
+                },
+                {
+                  "fieldName": "photo",
+                  "displayName": "Photo",
+                  "fieldType": "IMAGE"
+                }
+              ],
+              "complianceStandards": [
+                {
+                  "code": "UIDAI_AUA",
+                  "name": "UIDAI AUA/KUA Regulations"
+                },
+                {
+                  "code": "DPDPA_2023",
+                  "name": "Digital Personal Data Protection Act, 2023"
+                }
+              ]
+            }
+          },
+          {
+            "id": "res-vs-skill-001",
+            "descriptor": {
+              "name": "Skill Certificate Verification",
+              "shortDesc": "Hybrid verification of NSDC and Sector Skill Council certificates"
+            },
+            "resourceAttributes": {
+              "@context": "https://schema.beckn.io/VerificationResource/v2.1/context.jsonld",
+              "@type": "vr:VerificationResource",
+              "verificationType": {
+                "code": "SKILL_CERTIFICATE",
+                "name": "Skill Certificate Verification"
+              },
+              "supportedDocumentTypes": [
+                {
+                  "code": "SKILL_CERT",
+                  "name": "NSDC / Sector Skill Council Certificate"
+                },
+                {
+                  "code": "DEGREE_CERT",
+                  "name": "Vocational Training Degree Certificate"
+                }
+              ],
+              "supportedJurisdictions": [
+                {
+                  "code": "IN",
+                  "name": "India"
+                }
+              ],
+              "verificationMethod": "REAL_TIME_API",
+              "requiredInputFields": [
+                {
+                  "fieldName": "certificateNumber",
+                  "displayName": "Certificate Number",
+                  "fieldType": "STRING",
+                  "isRequired": true
+                },
+                {
+                  "fieldName": "holderName",
+                  "displayName": "Certificate Holder Name",
+                  "fieldType": "STRING",
+                  "isRequired": true
+                },
+                {
+                  "fieldName": "issuingBody",
+                  "displayName": "Issuing Body / Sector Skill Council",
+                  "fieldType": "STRING",
+                  "isRequired": true
+                },
+                {
+                  "fieldName": "issueYear",
+                  "displayName": "Year of Issue",
+                  "fieldType": "NUMBER",
+                  "isRequired": false
+                }
+              ],
+              "authoritativeSource": {
+                "name": "Skill India Portal — National Skill Development Corporation",
+                "url": "https://www.skillindia.gov.in",
+                "type": "GOVERNMENT_DATABASE"
+              },
+              "outputFields": [
+                {
+                  "fieldName": "holderName",
+                  "displayName": "Holder Name",
+                  "fieldType": "STRING"
+                },
+                {
+                  "fieldName": "certificateNumber",
+                  "displayName": "Certificate Number",
+                  "fieldType": "STRING"
+                },
+                {
+                  "fieldName": "skillName",
+                  "displayName": "Skill / Trade Name",
+                  "fieldType": "STRING"
+                },
+                {
+                  "fieldName": "qualificationPack",
+                  "displayName": "Qualification Pack ID",
+                  "fieldType": "STRING"
+                },
+                {
+                  "fieldName": "issuingBody",
+                  "displayName": "Issuing Body",
+                  "fieldType": "STRING"
+                },
+                {
+                  "fieldName": "issueDate",
+                  "displayName": "Issue Date",
+                  "fieldType": "DATE"
+                },
+                {
+                  "fieldName": "expiryDate",
+                  "displayName": "Expiry Date",
+                  "fieldType": "DATE"
+                }
+              ],
+              "complianceStandards": [
+                {
+                  "code": "NSQF",
+                  "name": "National Skills Qualifications Framework"
+                },
+                {
+                  "code": "DPDPA_2023",
+                  "name": "Digital Personal Data Protection Act, 2023"
+                }
+              ]
+            }
+          }
+        ],
+        "offers": [
+          {
+            "id": "offer-vs-dl-std-001",
+            "resourceIds": [
+              "res-vs-dl-001"
+            ],
+            "descriptor": {
+              "name": "DL Verification — Standard",
+              "shortDesc": "Real-time DL verification, result within 30 minutes"
+            },
+            "offerAttributes": {
+              "@context": "https://schema.beckn.io/VerificationOffer/v2.1/context.jsonld",
+              "@type": "vo:VerificationOffer",
+              "turnaroundTime": "PT30M",
+              "resultValidityPeriod": "P90D",
+              "pricingModel": "PER_REQUEST",
+              "serviceLevel": "STANDARD",
+              "dataRetentionPolicy": "P30D",
+              "supportedConsentMechanisms": [
+                "OTP",
+                "DIGITAL_SIGNATURE"
+              ]
+            },
+            "considerations": [
+              {
+                "id": "cons-vs-dl-cat-001",
+                "considerationAttributes": {
+                  "@context": "https://schema.beckn.io/PriceSpecification/v2.1/context.jsonld",
+                  "@type": "PriceSpecification",
+                  "price": 250,
+                  "priceCurrency": "INR",
+                  "valueAddedTaxIncluded": false,
+                  "description": "Per-request DL verification fee, excluding GST"
+                }
+              }
+            ]
+          },
+          {
+            "id": "offer-vs-identity-instant-001",
+            "resourceIds": [
+              "res-vs-identity-001"
+            ],
+            "descriptor": {
+              "name": "Identity Verification — Instant KYC",
+              "shortDesc": "Aadhaar eKYC with verified result in under 5 minutes"
+            },
+            "offerAttributes": {
+              "@context": "https://schema.beckn.io/VerificationOffer/v2.1/context.jsonld",
+              "@type": "vo:VerificationOffer",
+              "turnaroundTime": "PT5M",
+              "resultValidityPeriod": "P1Y",
+              "pricingModel": "PER_REQUEST",
+              "serviceLevel": "PREMIUM",
+              "dataRetentionPolicy": "P7D",
+              "supportedConsentMechanisms": [
+                "AADHAAR_EKYC",
+                "OTP"
+              ]
+            },
+            "considerations": [
+              {
+                "id": "cons-vs-identity-cat-001",
+                "considerationAttributes": {
+                  "@context": "https://schema.beckn.io/PriceSpecification/v2.1/context.jsonld",
+                  "@type": "PriceSpecification",
+                  "price": 150,
+                  "priceCurrency": "INR",
+                  "valueAddedTaxIncluded": false,
+                  "description": "Per-request Aadhaar eKYC fee, excluding GST"
+                }
+              }
+            ]
+          },
+          {
+            "id": "offer-vs-skill-hybrid-001",
+            "resourceIds": [
+              "res-vs-skill-001"
+            ],
+            "descriptor": {
+              "name": "Skill Certificate Verification — Hybrid",
+              "shortDesc": "NSDC skill certificate verification, result within 1 business day"
+            },
+            "offerAttributes": {
+              "@context": "https://schema.beckn.io/VerificationOffer/v2.1/context.jsonld",
+              "@type": "vo:VerificationOffer",
+              "turnaroundTime": "P1D",
+              "resultValidityPeriod": "P6M",
+              "pricingModel": "PER_REQUEST",
+              "serviceLevel": "STANDARD",
+              "dataRetentionPolicy": "P30D",
+              "supportedConsentMechanisms": [
+                "OTP",
+                "DIGITAL_SIGNATURE",
+                "OFFLINE_CONSENT"
+              ]
+            },
+            "considerations": [
+              {
+                "id": "cons-vs-skill-cat-001",
+                "considerationAttributes": {
+                  "@context": "https://schema.beckn.io/PriceSpecification/v2.1/context.jsonld",
+                  "@type": "PriceSpecification",
+                  "price": 350,
+                  "priceCurrency": "INR",
+                  "valueAddedTaxIncluded": false,
+                  "description": "Per-request skill certificate verification fee, excluding GST"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "context": {
+    "networkId": "verification-service",
+    "action": "on_select",
+    "version": "2.0.0",
+    "bapId": "bap.example.com",
+    "bapUri": "http://onix-bap:8081/bap/receiver",
+    "transactionId": "10dce2d5-4100-420c-9154-2ca7ec83c3d6",
+    "messageId": "e5f6a7b8-c9d0-4345-9b67-fa8901234bc4",
+    "timestamp": "2026-05-28T14:10:02+05:30",
+    "bppId": "bpp.example.com",
+    "bppUri": "http://onix-bpp:8082/bpp/receiver"
+  },
+  "message": {
+    "contract": {
+      "id": "contract-vs-10dce2d5",
+      "status": {
+        "code": "DRAFT"
+      },
+      "commitments": [
+        {
+          "id": "commitment-uc3-bank-001",
+          "status": {
+            "descriptor": {
+              "code": "DRAFT"
+            }
+          },
+          "resources": [
+            {
+              "id": "res-vs-bank-001",
+              "descriptor": {
+                "name": "Bank Account Verification",
+                "shortDesc": "Real-time bank account verification via NPCI IMPS penny drop"
+              },
+              "resourceAttributes": {
+                "@context": "https://schema.beckn.io/VerificationResource/v2.1/context.jsonld",
+                "@type": "vr:VerificationResource",
+                "verificationType": {
+                  "code": "BANK_ACCOUNT",
+                  "name": "Bank Account Verification"
+                },
+                "supportedDocumentTypes": [
+                  {
+                    "code": "BANK_ACCOUNT",
+                    "name": "Bank Account Details"
+                  }
+                ],
+                "supportedJurisdictions": [
+                  {
+                    "code": "IN",
+                    "name": "India"
+                  }
+                ],
+                "verificationMethod": "REAL_TIME_API",
+                "requiredInputFields": [
+                  {
+                    "fieldName": "accountNumber",
+                    "displayName": "Bank Account Number",
+                    "fieldType": "STRING",
+                    "isRequired": true,
+                    "validationPattern": "^[0-9]{9,18}$"
+                  },
+                  {
+                    "fieldName": "ifscCode",
+                    "displayName": "IFSC Code",
+                    "fieldType": "STRING",
+                    "isRequired": true,
+                    "validationPattern": "^[A-Z]{4}0[A-Z0-9]{6}$"
+                  },
+                  {
+                    "fieldName": "accountHolderName",
+                    "displayName": "Account Holder Name (as per bank records)",
+                    "fieldType": "STRING",
+                    "isRequired": true
+                  },
+                  {
+                    "fieldName": "mobileNumber",
+                    "displayName": "Mobile Number (for OTP consent)",
+                    "fieldType": "STRING",
+                    "isRequired": false,
+                    "validationPattern": "^[0-9]{10}$"
+                  }
+                ],
+                "authoritativeSource": {
+                  "name": "NPCI — National Payments Corporation of India",
+                  "url": "https://www.npci.org.in",
+                  "type": "FINANCIAL_NETWORK"
+                },
+                "outputFields": [
+                  {
+                    "fieldName": "accountHolderName",
+                    "displayName": "Account Holder Name",
+                    "fieldType": "STRING"
+                  },
+                  {
+                    "fieldName": "accountStatus",
+                    "displayName": "Account Status",
+                    "fieldType": "STRING"
+                  },
+                  {
+                    "fieldName": "bankName",
+                    "displayName": "Bank Name",
+                    "fieldType": "STRING"
+                  },
+                  {
+                    "fieldName": "branchName",
+                    "displayName": "Branch Name",
+                    "fieldType": "STRING"
+                  },
+                  {
+                    "fieldName": "ifscCode",
+                    "displayName": "IFSC Code",
+                    "fieldType": "STRING"
+                  },
+                  {
+                    "fieldName": "accountNumberLastFour",
+                    "displayName": "Last 4 Digits of Account Number",
+                    "fieldType": "STRING"
+                  }
+                ]
+              },
+              "quantity": {
+                "count": 1
+              }
+            }
+          ],
+          "offer": {
+            "id": "offer-vs-bank-std-001",
+            "resourceIds": [
+              "res-vs-bank-001"
+            ],
+            "descriptor": {
+              "name": "Bank Account Verification — Standard",
+              "shortDesc": "NPCI penny drop with name match; result in under 5 minutes"
+            },
+            "offerAttributes": {
+              "@context": "https://schema.beckn.io/VerificationOffer/v2.1/context.jsonld",
+              "@type": "vo:VerificationOffer",
+              "turnaroundTime": "PT5M",
+              "resultValidityPeriod": "P30D",
+              "pricingModel": "PER_REQUEST",
+              "serviceLevel": "STANDARD",
+              "dataRetentionPolicy": "P90D",
+              "supportedConsentMechanisms": [
+                "OTP",
+                "DIGITAL_SIGNATURE"
+              ]
+            },
+            "considerations": [
+              {
+                "id": "cons-vs-bank-cat-001",
+                "considerationAttributes": {
+                  "@context": "https://schema.beckn.io/PriceSpecification/v2.1/context.jsonld",
+                  "@type": "PriceSpecification",
+                  "price": 100,
+                  "priceCurrency": "INR",
+                  "valueAddedTaxIncluded": false,
+                  "description": "Per-request bank account verification fee via NPCI penny drop, excluding GST"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "consideration": [
+        {
+          "id": "cons-vs-bank-cat-001",
+          "status": {
+            "code": "PENDING"
+          },
+          "considerationAttributes": {
+            "@context": "https://schema.beckn.io/PriceSpecification/v2.1/context.jsonld",
+            "@type": "PriceSpecification",
+            "price": 100,
+            "priceCurrency": "INR",
+            "valueAddedTaxIncluded": false,
+            "description": "Per-request bank account verification fee via NPCI penny drop, excluding GST"
+          }
+        }
+      ],
+      "participants": [
+        {
+          "id": "part-uc3-payrollsuite-001"
+        }
+      ]
+    }
+  }
+}

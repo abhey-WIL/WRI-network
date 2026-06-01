@@ -1,0 +1,205 @@
+{
+  "context": {
+    "networkId": "verification-service",
+    "action": "on_select",
+    "version": "2.0.0",
+    "bapId": "bap.example.com",
+    "bapUri": "http://onix-bap:8081/bap/receiver",
+    "transactionId": "10dce2d5-4100-420c-9154-2ca7ec83c3d6",
+    "messageId": "b6c7d8e9-f0a1-4345-8c67-de8901234fa5",
+    "timestamp": "2026-05-20T09:30:02+05:30",
+    "bppId": "bpp.example.com",
+    "bppUri": "http://onix-bpp:8082/bpp/receiver"
+  },
+  "message": {
+    "contract": {
+      "id": "contract-vs-10dce2d5",
+      "status": {
+        "code": "DRAFT"
+      },
+      "commitments": [
+        {
+          "id": "commitment-uc4-skill-001",
+          "status": {
+            "descriptor": {
+              "code": "DRAFT"
+            }
+          },
+          "resources": [
+            {
+              "id": "res-vs-skill-001",
+              "descriptor": {
+                "name": "Skill Certificate Verification",
+                "shortDesc": "Hybrid verification of NSDC and Sector Skill Council certificates"
+              },
+              "resourceAttributes": {
+                "@context": "https://schema.beckn.io/VerificationResource/v2.1/context.jsonld",
+                "@type": "vr:VerificationResource",
+                "verificationType": {
+                  "code": "SKILL_CERTIFICATE",
+                  "name": "Skill Certificate Verification"
+                },
+                "supportedDocumentTypes": [
+                  {
+                    "code": "SKILL_CERT",
+                    "name": "NSDC / Sector Skill Council Certificate"
+                  },
+                  {
+                    "code": "DEGREE_CERT",
+                    "name": "Vocational Training Degree Certificate"
+                  }
+                ],
+                "supportedJurisdictions": [
+                  {
+                    "code": "IN",
+                    "name": "India"
+                  }
+                ],
+                "verificationMethod": "REAL_TIME_API",
+                "requiredInputFields": [
+                  {
+                    "fieldName": "certificateNumber",
+                    "displayName": "Certificate Number",
+                    "fieldType": "STRING",
+                    "isRequired": true
+                  },
+                  {
+                    "fieldName": "holderName",
+                    "displayName": "Certificate Holder Name",
+                    "fieldType": "STRING",
+                    "isRequired": true
+                  },
+                  {
+                    "fieldName": "issuingBody",
+                    "displayName": "Issuing Body / Sector Skill Council",
+                    "fieldType": "STRING",
+                    "isRequired": true
+                  },
+                  {
+                    "fieldName": "issueYear",
+                    "displayName": "Year of Issue",
+                    "fieldType": "NUMBER",
+                    "isRequired": false
+                  }
+                ],
+                "authoritativeSource": {
+                  "name": "Skill India Portal — National Skill Development Corporation",
+                  "url": "https://www.skillindia.gov.in",
+                  "type": "GOVERNMENT_DATABASE"
+                },
+                "outputFields": [
+                  {
+                    "fieldName": "holderName",
+                    "displayName": "Holder Name",
+                    "fieldType": "STRING"
+                  },
+                  {
+                    "fieldName": "certificateNumber",
+                    "displayName": "Certificate Number",
+                    "fieldType": "STRING"
+                  },
+                  {
+                    "fieldName": "skillName",
+                    "displayName": "Skill / Trade Name",
+                    "fieldType": "STRING"
+                  },
+                  {
+                    "fieldName": "qualificationPack",
+                    "displayName": "Qualification Pack ID",
+                    "fieldType": "STRING"
+                  },
+                  {
+                    "fieldName": "issuingBody",
+                    "displayName": "Issuing Body",
+                    "fieldType": "STRING"
+                  },
+                  {
+                    "fieldName": "issueDate",
+                    "displayName": "Issue Date",
+                    "fieldType": "DATE"
+                  },
+                  {
+                    "fieldName": "expiryDate",
+                    "displayName": "Expiry Date",
+                    "fieldType": "DATE"
+                  }
+                ],
+                "complianceStandards": [
+                  {
+                    "code": "NSQF",
+                    "name": "National Skills Qualifications Framework"
+                  },
+                  {
+                    "code": "DPDPA_2023",
+                    "name": "Digital Personal Data Protection Act, 2023"
+                  }
+                ]
+              },
+              "quantity": {
+                "count": 1
+              }
+            }
+          ],
+          "offer": {
+            "id": "offer-vs-skill-hybrid-001",
+            "resourceIds": [
+              "res-vs-skill-001"
+            ],
+            "descriptor": {
+              "name": "Skill Certificate Verification — Hybrid",
+              "shortDesc": "NSDC skill certificate verification, result within 1 business day"
+            },
+            "offerAttributes": {
+              "@context": "https://schema.beckn.io/VerificationOffer/v2.1/context.jsonld",
+              "@type": "vo:VerificationOffer",
+              "turnaroundTime": "P1D",
+              "resultValidityPeriod": "P6M",
+              "pricingModel": "PER_REQUEST",
+              "serviceLevel": "STANDARD",
+              "dataRetentionPolicy": "P30D",
+              "supportedConsentMechanisms": [
+                "OTP",
+                "DIGITAL_SIGNATURE",
+                "OFFLINE_CONSENT"
+              ]
+            },
+            "considerations": [
+              {
+                "id": "cons-vs-skill-cat-001",
+                "considerationAttributes": {
+                  "@context": "https://schema.beckn.io/PriceSpecification/v2.1/context.jsonld",
+                  "@type": "PriceSpecification",
+                  "price": 350,
+                  "priceCurrency": "INR",
+                  "valueAddedTaxIncluded": false,
+                  "description": "Per-request skill certificate verification fee, excluding GST"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "consideration": [
+        {
+          "id": "cons-vs-skill-cat-001",
+          "status": {
+            "code": "PENDING"
+          },
+          "considerationAttributes": {
+            "@context": "https://schema.beckn.io/PriceSpecification/v2.1/context.jsonld",
+            "@type": "PriceSpecification",
+            "price": 350,
+            "priceCurrency": "INR",
+            "valueAddedTaxIncluded": false,
+            "description": "Per-request skill certificate verification fee, excluding GST"
+          }
+        }
+      ],
+      "participants": [
+        {
+          "id": "part-uc4-zapcharge-001"
+        }
+      ]
+    }
+  }
+}
