@@ -186,7 +186,7 @@
   "variable": [
     {
       "key": "networkId",
-      "value": "verification-service"
+      "value": "nfh.global/testnet"
     },
     {
       "key": "version",

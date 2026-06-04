@@ -1,6 +1,6 @@
 {
   "context": {
-    "networkId": "verification-service",
+    "networkId": "nfh.global/testnet",
     "action": "confirm",
     "version": "2.0.0",
     "bapId": "bap.example.com",
